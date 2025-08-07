@@ -1,0 +1,70 @@
+@use 'colors.scss' as *;
+
+$breakpoints: (
+  'xxs': 375px,
+  'xs': 480px,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1441px,
+  'xxl': 1536px,
+) !default;
+
+@mixin respond($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+@mixin appear {
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin vanish {
+  @keyframes vanish {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+@mixin transition($property: all, $timing: ease-out, $duration: 0.3s) {
+  transition-property: $property;
+  transition-timing-function: $timing;
+  transition-duration: $duration;
+}
+
+@mixin transition-duration($duration: 0.3s) {
+  transition-duration: $duration;
+}
+
+@mixin hover-supported {
+  @media not all and ((max-width: 1024px) or (pointer: coarse)) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin active-supported {
+  @media not all and ((max-width: 1024px) or (pointer: coarse)) {
+    &:active {
+      @content;
+    }
+  }
+}

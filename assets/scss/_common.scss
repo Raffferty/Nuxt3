@@ -1,0 +1,60 @@
+@use 'colors.scss' as *;
+@use 'variables.scss' as *;
+@use 'mixins.scss' as *;
+
+#__nuxt,
+#__layout {
+  height: 100%;
+}
+body {
+  font-weight: $font-weight-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  font-family: $font-family-base;
+  color: $color;
+  background-color: $bg-main;
+}
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  .col {
+    padding: 0 15px;
+  }
+}
+a {
+  color: $color;
+  &:hover {
+    text-decoration: none;
+  }
+}
+p {
+  margin-bottom: 10px;
+  strong {
+    font-weight: $font-weight-800;
+  }
+}
+.colored {
+  background: linear-gradient(
+    134.51deg,
+    #7243be -4.37%,
+    #e35acc 30.61%,
+    #9348fc 69.91%,
+    #3094ff 107.1%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.font-weight-800 {
+  font-weight: $font-weight-800;
+}
+.text-center {
+  text-align: center;
+}

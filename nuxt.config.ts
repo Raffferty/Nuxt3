@@ -4,4 +4,15 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@pinia/nuxt'],
   css: ['@/assets/scss/main.scss'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData:
+            '@use "@/assets/scss/colors.scss" as *; @use "@/assets/scss/variables.scss" as *; @use "@/assets/scss/mixins.scss" as *;',
+          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
+        },
+      },
+    },
+  },
 })

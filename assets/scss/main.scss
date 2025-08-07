@@ -1,7 +1,5 @@
-$primary: #0070f3;
-$text-color: #fff;
-
-body {
-  background-color: $primary;
-  color: $text-color;
-}
+@use 'reset';
+@use 'fonts';
+@use 'title';
+@use 'scroll';
+@use 'common';
