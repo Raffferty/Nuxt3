@@ -1,3 +1,68 @@
+# Standard Nuxt 3 Project Structure
+
+```ruby
+my-nuxt-app/
+├── .nuxt/ (auto-generated)
+├── assets/
+├── components/
+├── composables/
+├── layouts/
+├── middleware/
+├── pages/
+├── plugins/
+├── public/
+├── server/
+│   ├── api/
+│   └── middleware/
+├── stores/
+├── types/
+├── utils/
+├── app.vue
+├── nuxt.config.ts
+├── package.json
+├── tsconfig.json
+```
+
+# Top-Level Files
+
+| File             | Description                                                       |
+| ---------------- | ----------------------------------------------------------------- |
+| `app.vue`        | Main app shell (root component) where layouts/pages are rendered. |
+| `nuxt.config.ts` | Nuxt configuration file (TypeScript supported by default).        |
+| `package.json`   | Project dependencies and scripts.                                 |
+| `tsconfig.json`  | TypeScript configuration.                                         |
+| `.nuxt/`         | Auto-generated Nuxt build files. Don’t edit manually.             |
+
+# Directories Explained
+
+| Directory            | Purpose                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| `assets/`            | Uncompiled static assets like SCSS, images, fonts. Not publicly accessible directly. |
+| `components/`        | Vue components auto-imported by Nuxt. Supports subdirectories.                       |
+| `composables/`       | Composables (like `useXyz`) auto-imported and shared across the app.                 |
+| `pages/`             | Vue files here become routes automatically.                                          |
+| `layouts/`           | Custom layouts for pages (e.g., `default.vue`, `admin.vue`).                         |
+| `middleware/`        | Route middleware (client-side navigation guards).                                    |
+| `plugins/`           | Client/server plugins that run before app mounts.                                    |
+| `public/`            | Static files served as-is (e.g., images, robots.txt). Accessible via `/`.            |
+| `server/api/`        | API routes (server-side only, becomes `/api/*`).                                     |
+| `server/middleware/` | Server middleware like authentication or custom handlers.                            |
+| `utils/` (optional)  | Utility functions (not auto-imported by default).                                    |
+| `types/` (optional)  | Type definitions and interfaces.                                                     |
+
+# Notes
+
+- Routing: pages/ defines routing automatically using file names.
+
+- Auto-Imports: components/, composables/, and utils/ (with config) can be auto-imported.
+
+- API Routes: Placed in server/api/, and follow file-based routing too.
+
+- Middlewares:
+  - middleware/ → client-side.
+
+  - server/middleware/ → server-side
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
