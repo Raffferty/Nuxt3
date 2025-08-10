@@ -12,8 +12,27 @@
 </template>
 
 <script setup lang="ts">
-import AppButtonText from '@/components/app-button-text.vue'
-import { useCounterStore } from '@/stores/counter'
+// import AppButtonText from '@/components/app-button-text.vue' // explicitly import the component from @/components
+// import { computed } from 'vue' // explicitly import Vue API from vue
+// import { computed } from '#imports' // explicitly import Vue API from Nuxt's #imports - better way
+// import { useCounterStore } from '@/stores/counter' // explicitly import the store
+
+/* 
+  in nuxt.config.ts we can disable auto-importing:
+
+  // disable auto-importing composables and utilities
+  // This will disable auto-imports completely but it's still possible to use explicit imports from #imports.
+  imports: {
+    autoImport: false,
+  },
+
+  // disable auto-importing components from your own ~/components directory
+  components: {
+    dirs: [],
+  },
+
+  But it is OK if we explicitly import even if auto-importing is diabled
+ */
 
 const counterStore = useCounterStore()
 

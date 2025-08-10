@@ -3,6 +3,17 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@pinia/nuxt', '@nuxt/image'],
+
+  // disable auto-importing composables and utilities
+  // This will disable auto-imports completely but it's still possible to use explicit imports from #imports.
+  /* imports: {
+    autoImport: false,
+  }, */
+
+  // disable auto-importing components from your own ~/components directory
+  /* components: {
+    dirs: [],
+  }, */
   app: {
     head: {
       title: 'Nuxt3 Tutorial',

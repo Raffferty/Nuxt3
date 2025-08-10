@@ -63,6 +63,25 @@ my-nuxt-app/
 
   - server/middleware/ → server-side
 
+- in [nuxt.config.ts](./nuxt.config.ts) we can disable auto-importing:
+
+```ts
+export default defineNuxtConfig({
+  // disable auto-importing composables and utilities
+  // This will disable auto-imports completely but it's still possible to use explicit imports from #imports.
+  imports: {
+    autoImport: false,
+  },
+
+  // disable auto-importing components from your own ~/components directory
+  components: {
+    dirs: [],
+  },
+
+  // But it is OK if we explicitly import even if auto-importing is diabled
+})
+```
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
