@@ -185,7 +185,7 @@ export default withNuxt(
 )
 ```
 
-- ESLint configs in nuxt.config.ts
+- ESLint configs in `nuxt.config.ts`
 
 ```ts
 export default defineNuxtConfig({
@@ -205,6 +205,18 @@ export default defineNuxtConfig({
   "lint": "eslint .",
   "lint:fix": "eslint . --fix"
 },
+```
+
+# Suppress console.logs on production mode in `nuxt.config.ts`
+
+```ts
+export default defineNuxtConfig({
+  vite: {
+    esbuild: {
+      drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+    },
+  },
+})
 ```
 
 # Nuxt Minimal Starter
