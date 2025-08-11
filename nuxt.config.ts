@@ -2,7 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', '@nuxt/image'],
+  modules: ['@pinia/nuxt', '@nuxt/image', '@nuxt/eslint'],
+  eslint: {
+    // options here
+    checker: true, // ESLint checking on runing dev server
+  },
   typescript: {
     /*
     Nuxt’s built-in type checking slows down hot-reload a bit

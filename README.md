@@ -155,6 +155,58 @@ export default defineNuxtConfig({
     - Doesn’t build your app — just sets up dev-time tooling.
   - **When to use**: You usually **don’t run it manually** — it’s there so every time dependencies are installed, Nuxt is ready for dev immediately.
 
+# ESLint Module [(docs)](https://eslint.nuxt.com/packages/module)
+
+- Quick Setup:
+
+```sh
+npx nuxt module add eslint
+```
+
+- install extra dependencies `vite-plugin-eslint2` for Vite
+
+```sh
+npm i -D vite-plugin-eslint2
+```
+
+- configs in `eslint.config.mjs`
+
+```ts
+import withNuxt from './.nuxt/eslint.config.mjs'
+
+export default withNuxt(
+  // Your custom configs here
+  {
+    files: ['**/*.{ts,vue}'],
+    rules: {
+      // 'no-console': ['error', { allow: ['warn', 'error'] }], // allow console.warn, console.error but not-allow console.log in TypeScript files
+    },
+  },
+)
+```
+
+- ESLint configs in nuxt.config.ts
+
+```ts
+export default defineNuxtConfig({
+  modules: ['@nuxt/eslint'],
+  eslint: {
+    // options here
+    checker: true, // for ESLint checking when runing dev server, using `vite-plugin-eslint2` (NOT on the build time!)
+  },
+})
+```
+
+- ESLint scripts in package.json
+
+```json
+"scripts": {
+  "build": "eslint . && nuxt build", // to check ESLint before the build
+  "lint": "eslint .",
+  "lint:fix": "eslint . --fix"
+},
+```
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

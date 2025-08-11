@@ -11,6 +11,8 @@ export const useCounterStore = defineStore('counter', () => {
   // actions
   function increment(i: number = 1) {
     count.value += i
+
+    console.log('function increment: count.value', count.value) // for ESLint checking: 'no-console' rule in eslint.config.mjs file
   }
 
   return {
