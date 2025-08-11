@@ -46,7 +46,9 @@ const counter_color = computed(() => color.value.counter)
 const double_counter_color = computed(() => color.value.double_counter)
 
 const handleClick = () => {
-  counterStore.increment()
+  // counterStore.increment('a') // for type checking
+
+  counterStore.increment(3)
 }
 </script>
 

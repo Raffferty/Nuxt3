@@ -3,12 +3,27 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@pinia/nuxt', '@nuxt/image'],
+  typescript: {
+    /*
+    Nuxt’s built-in type checking slows down hot-reload a bit
+    A faster pattern is:
+    
+    Dev mode: Run Nuxt with typeCheck: false (no blocking on reloads). - in defineNuxtConfig: typeCheck: process.env.NODE_ENV === 'production'
 
-  // disable auto-importing composables and utilities
-  // This will disable auto-imports completely but it's still possible to use explicit imports from #imports.
-  /* imports: {
-    autoImport: false,
-  }, */
+    Parallel type check: Run "vue-tsc --noEmit --skipLibCheck --watch" (script: "typecheck-watch") in another terminal.
+     */
+
+    typeCheck: process.env.NODE_ENV === 'production', // check types only on build time
+    // typeCheck: true, // type-checking at build or development time
+  },
+
+  imports: {
+    /*
+      disable auto-importing composables and utilities
+      This will disable auto-imports completely but it's still possible to use explicit imports from #imports.
+     */
+    // autoImport: false,
+  },
 
   // disable auto-importing components from your own ~/components directory
   /* components: {

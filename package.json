@@ -8,6 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck",
+    "typecheck-watch": "vue-tsc --noEmit --skipLibCheck --watch",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -22,6 +24,8 @@
   "devDependencies": {
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.6.2",
-    "sass": "^1.89.2"
+    "sass": "^1.89.2",
+    "typescript": "^5.9.2",
+    "vue-tsc": "^3.0.5"
   }
 }

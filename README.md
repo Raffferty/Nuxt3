@@ -82,6 +82,79 @@ export default defineNuxtConfig({
 })
 ```
 
+# Type-checking
+
+- By default, Nuxt doesn't check types when you run nuxt dev or nuxt build, for performance reasons.
+  To enable type-checking at build or development time, install vue-tsc and typescript as development dependency:
+
+```sh
+npm install --save-dev vue-tsc typescript
+```
+
+- Nuxt’s built-in type checking slows down hot-reload a bit
+  A faster pattern is:
+  Dev mode: Run Nuxt with typeCheck: false (no blocking on reloads). - in defineNuxtConfig: typeCheck: process.env.NODE_ENV === 'production'
+  Parallel type check: Run "vue-tsc --noEmit --skipLibCheck --watch" (script: "typecheck-watch") in another terminal.
+
+```json
+"scripts": {
+  "typecheck": "nuxt typecheck",
+  "typecheck-watch": "vue-tsc --noEmit --skipLibCheck --watch"
+},
+```
+
+```ts
+export default defineNuxtConfig({
+  typescript: {
+    typeCheck: process.env.NODE_ENV === 'production',
+  },
+})
+```
+
+# Nuxt CLI commands (scripts):
+
+```json
+"scripts": {
+  "build": "nuxt build",
+  "generate": "nuxt generate",
+  "preview": "nuxt preview",
+  "postinstall": "nuxt prepare"
+},
+```
+
+- `"build": "nuxt build"`
+  - Purpose: Builds your Nuxt app for production.
+  - **What it does**:
+    - Runs Vite’s build process.
+    - Generates optimized JS/CSS chunks, HTML templates, and server output (for SSR).
+    - If you’re using SSR mode, produces a `.output` folder with server and client bundles.
+    - Runs type checking if `typescript.typeCheck: true`.
+    - Generates optimized JS/CSS chunks, HTML templates, and server output (for SSR).
+  - **When to use**: Before deploying to production, or in CI/CD pipelines.
+
+- `"generate": "nuxt generate"`
+  - Purpose: Pre-renders your site into static HTML (SSG mode).
+  - **What it does**:
+    - Runs a production build.
+    - Visits every route (from `pages/` and `nitro.prerender.routes config`) and generates HTML files.
+    - Produces a `dist/` folder ready to be served by any static hosting (Netlify, GitHub Pages, etc.).
+  - **When to use**: If you want a static site with no Node server needed.
+
+- `"preview": "nuxt preview"`
+  - Purpose: Serves a built app locally to preview the production result.
+  - **What it does**:
+    - Starts a local server using the .output (SSR) or dist (SSG) folder from a previous nuxt build or nuxt generate.
+    - Doesn’t rebuild — just serves what’s already built.
+  - **When to use**: To test the exact production build locally before deploying.
+
+- `"postinstall": "nuxt prepare"`
+  - Purpose: Runs after npm `install` automatically (because of the `postinstall` hook).
+  - **What it does**:
+    - Prepares Nuxt’s internal type generation (e.g., `nuxt.d.ts`).
+    - Ensures `.nuxt/` folder has the correct type definitions for IDE autocompletion.
+    - Doesn’t build your app — just sets up dev-time tooling.
+  - **When to use**: You usually **don’t run it manually** — it’s there so every time dependencies are installed, Nuxt is ready for dev immediately.
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
