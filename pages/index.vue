@@ -1,5 +1,7 @@
 <template>
   <div class="home-page">
+    <AppSpinner v-if="counterStore.count === 3" />
+
     <AppButtonText class="home-page__counter-button" @click="handleClick">Counter++</AppButtonText>
 
     <h3 class="home-page__counter">count is: {{ counterStore.count }}</h3>
@@ -8,10 +10,82 @@
     <AppButtonText class="home-page__counter-button" @click="counterStore.count = 0"
       >Reset Counter</AppButtonText
     >
+
+    <div class="divider" />
+    <!-- Dynamic Components -->
+    <h3>* Dynamic Components</h3>
+
+    <!-- component :is -->
+    <h3>component :is</h3>
+
+    <h3>import { AppButtonText } from '#components'</h3>
+    <component :is="AppButtonText">Component :is="AppButtonText"</component>
+
+    <h3>const MyButton = {{ `resolveComponent('AppButtonText')` }}</h3>
+    <component :is="MyButton">Component :is="MyButton"</component>
+
+    <div class="divider" />
+    <!-- Dynamic Imports -->
+    <h3>* Dynamic Imports</h3>
+
+    <!-- Lazy loaded component -->
+    <h3>Lazy loaded component: {{ `<LazyAppButtonText />` }}</h3>
+    <LazyAppButtonText>LazyAppButtonText</LazyAppButtonText>
+
+    <!-- Delayed (or Lazy) Hydration -->
+    <div class="divider" />
+    <h3>* Delayed (or Lazy) Hydration</h3>
+
+    <!-- Hydration Strategies -->
+    <h3>Hydration Strategies</h3>
+
+    <p>hydrate-on-visible: Hydrates the component when it becomes visible in the viewport.</p>
+    <p>
+      hydrate-on-idle: Hydrates the component when the browser is idle. This is suitable if you need
+      the component to load as soon as possible, but not block the critical rendering path.
+    </p>
+    <p>
+      hydrate-on-interaction: Hydrates the component after a specified interaction (e.g., click,
+      mouseover) => hydrate-on-interaction="mouseover"
+    </p>
+    <p>
+      hydrate-on-media-query: Hydrates the component when the window matches a media query =>
+      hydrate-on-media-query="(max-width: 768px)"
+    </p>
+    <p>
+      hydrate-after: Hydrates the component after a specified delay (in milliseconds) =>
+      :hydrate-after="2000"
+    </p>
+    <p>
+      hydrate-when: Hydrates the component based on a boolean condition => :hydrate-when="isReady" )
+    </p>
+    <p>hydrate-never: Never hydrates the component.</p>
+
+    <h3>All delayed hydration components emit a @hydrated event when they are hydrated.</h3>
+
+    <LazyAppButtonText
+      hydrate-on-visible
+      @click="handleClick"
+      @hydrated="onHydrate('hydrate-on-visible')"
+      >{{ `<LazyAppButtonText hydrate-on-visible />` }}</LazyAppButtonText
+    >
+
+    <p />
+
+    <LazyAppButtonText hydrate-on-media-query="(max-width: 768px)" @click="handleClick"
+      >{{ `<LazyAppButtonText hydrate-on-media-query="(max-width: 768px)" />` }}</LazyAppButtonText
+    >
   </div>
 </template>
 
 <script setup lang="ts">
+// AppButtonText is explicitly imported to use in '<component :is="AppButtonText" />'
+// We can explicitly import components from #components if you want or need to bypass Nuxt's auto-importing functionality.
+import { AppButtonText, AppSpinner } from '#components'
+
+// For using in '<component :is="..." />'
+const MyButton = resolveComponent('AppButtonText')
+
 // import AppButtonText from '@/components/app-button-text.vue' // explicitly import the component from @/components
 // import { computed } from 'vue' // explicitly import Vue API from vue
 // import { computed } from '#imports' // explicitly import Vue API from Nuxt's #imports - better way
@@ -38,8 +112,8 @@ const counterStore = useCounterStore()
 
 const color = computed(() => {
   return counterStore.count % 2 == 0
-    ? { counter: 'aqua', double_counter: 'red' }
-    : { counter: 'red', double_counter: 'aqua' }
+    ? { counter: 'green', double_counter: 'red' }
+    : { counter: 'red', double_counter: 'green' }
 })
 
 const counter_color = computed(() => color.value.counter)
@@ -50,13 +124,16 @@ const handleClick = () => {
 
   counterStore.increment(3)
 }
+
+const onHydrate = (hydrated_on: string) => {
+  console.log(hydrated_on)
+}
 </script>
 
 <style lang="scss">
 .home-page {
   width: fit-content;
   min-width: 350px;
-  color: $color-black-2;
   text-align: center;
 
   &__counter-button {
@@ -80,6 +157,14 @@ const handleClick = () => {
     border-radius: 4px;
     transition: background-color 0.2s;
     background-color: v-bind(double_counter_color);
+  }
+
+  h3 {
+    margin-top: 24px;
+  }
+
+  p {
+    text-align: left;
   }
 }
 </style>

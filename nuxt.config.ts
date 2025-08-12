@@ -36,8 +36,13 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Nuxt3 Tutorial',
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
+      htmlAttrs: {
+        lang: 'en',
+      },
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { charset: 'utf-8' },
+      ],
       link: [
         { rel: 'icon', type: 'image/ico', href: '/favicon/favicon.ico' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
@@ -82,9 +87,12 @@ export default defineNuxtConfig({
           crossorigin: 'anonymous',
         },
       ],
-      htmlAttrs: {
-        lang: 'en',
-      },
+      style: [],
+      script: [],
+      noscript: [
+        // <noscript>JavaScript is required</noscript>
+        { textContent: 'JavaScript is required' },
+      ],
     },
   },
   css: ['@/assets/scss/main.scss'],
