@@ -110,4 +110,26 @@ export default defineNuxtConfig({
       drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
     },
   },
+  runtimeConfig: {
+    // runtimeConfig values can be accesd by useRuntimeConfig(), for example: useRuntimeConfig().public.baseUrl
+
+    // keys in runtimeConfig => keys in .env :=> apiSecret = env.NUXT_API_SECRET
+    apiSecret: process.env.NUXT_API_SECRET, //! as apiSecret is Not public - it can be accessed ONLY on SERVER side by useRuntimeConfig().apiSecret
+
+    // public.baseUrl = env.NUXT_PUBLIC_BASE_URL
+    // public.theme = env.NUXT_PUBLIC_THEME
+    // public.apiBase = NUXT_PUBLIC_API_BASE
+    public: {
+      // the value of baseUrl is taken from process.env.NUXT_PUBLIC_BASE_URL of the served (or built, or generated) .env file
+      baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
+
+      //! the default values will be overriden by appropriate values from .env file served by LOCAL server:
+      // for example: nuxt dev --dotenv .env.development.local
+
+      //! when we build the project as SSR for deployment - the default values will be overriden by appropriate values of env vars of the set on the hosting platform (Vercel, Netlify, Docker, etc.)
+      //! when we generate the project as SSG for deployment - the default values will be overriden by appropriate values of env vars in generating time, for example: nuxt generate --dotenv .env.production
+      theme: 'default-theme', // as we don't have in .env file the key NUXT_PUBLIC_THEME - the default value for theme will be used: 'default-theme'
+      apiBase: 'default-api-base', // as we have in .env file the key NUXT_PUBLIC_API_BASE - it's value will override the default value 'default-api-base'
+    },
+  },
 })

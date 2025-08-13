@@ -29,14 +29,6 @@
   background: url('@/assets/images/bg-default.svg') no-repeat center;
   background-size: cover;
 
-  @include respond('lg') {
-    padding: 0 10px;
-  }
-
-  @include respond('md') {
-    padding: 0 6px;
-  }
-
   &__logo-section {
     display: flex;
     align-items: center;

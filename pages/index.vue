@@ -105,8 +105,41 @@ const MyButton = resolveComponent('AppButtonText')
     dirs: [],
   },
 
-  But it is OK if we explicitly import even if auto-importing is diabled
- */
+  But it is OK if we explicitly import even if auto-importing is enabled
+*/
+
+console.log('import.meta.env.MODE', import.meta.env.MODE) // development / production
+console.log('import.meta.env.DEV', import.meta.env.DEV) // false / true
+console.log('import.meta.env.PROD', import.meta.env.PROD) // false / true
+
+console.log('meta.client', import.meta.client) // false / true
+console.log('meta.server', import.meta.server) // false / true
+console.log('meta.dev', import.meta.dev) // false / true
+console.log('meta.url', import.meta.url) // ssr: file:///Users/rafaelkrbashian/Tutorials/Nuxt3-Tutorial/pages/index.vue; client: http://localhost:3000/_nuxt/pages/index.vue
+console.log('meta.dirname', import.meta.dirname) // ssr: /Users/rafaelkrbashian/Tutorials/Nuxt3-Tutorial/pages
+console.log('meta.filename', import.meta.filename) // ssr: /Users/rafaelkrbashian/Tutorials/Nuxt3-Tutorial/pages/index.vue
+
+// console.log('meta.baseURL', import.meta.baseURL) // undefined
+// console.log('meta.glob', import.meta.glob) // undefined
+// console.log('meta.main', import.meta.main) // undefined
+// console.log('meta.versions', import.meta.versions) // undefined
+
+console.log('process.env.NUXT_API_SECRET', process.env.NUXT_API_SECRET) // undefined on client side
+console.log('process.env.NUXT_PUBLIC_API_BASE', process.env.NUXT_PUBLIC_API_BASE) // undefined on client side
+
+const config = useRuntimeConfig()
+
+const apiSecret = config.apiSecret // undefined on client side
+
+const theme = config.public.theme // gets default value from nuxt.config.ts file from runtimeConfig.public.theme as there is no NUXT_PUBLIC_THEME in .env file
+const apiBase = config.public.apiBase // gets the NUXT_PUBLIC_API_BASE value from .env file and overrides default value in nuxt.config.ts file in runtimeConfig.public.apiBase
+const baseUrl = config.public.baseUrl // gets the runtimeConfig.public.baseUrl value from nuxt.config.ts file as it is = process.env.NUXT_PUBLIC_BASE_URL
+
+console.log('apiSecret', apiSecret)
+
+console.log('theme', theme)
+console.log('apiBase', apiBase)
+console.log('baseUrl', baseUrl)
 
 const counterStore = useCounterStore()
 
@@ -132,7 +165,6 @@ const onHydrate = (hydrated_on: string) => {
 
 <style lang="scss">
 .home-page {
-  width: fit-content;
   min-width: 350px;
   text-align: center;
 
@@ -142,7 +174,10 @@ const onHydrate = (hydrated_on: string) => {
   }
 
   &__counter {
+    width: fit-content;
+    min-width: 400px;
     min-height: 60px;
+    margin: 0 auto;
     margin-bottom: 2px;
     padding: 8px;
     border-radius: 4px;
@@ -151,8 +186,10 @@ const onHydrate = (hydrated_on: string) => {
   }
 
   &__double-counter {
+    width: fit-content;
+    min-width: 400px;
     min-height: 60px;
-    margin: 0;
+    margin: 0 auto;
     padding: 8px;
     border-radius: 4px;
     transition: background-color 0.2s;
