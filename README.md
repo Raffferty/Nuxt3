@@ -227,7 +227,7 @@ export default defineNuxtConfig({
     // runtimeConfig values can be accesd by useRuntimeConfig(), for example: useRuntimeConfig().public.baseUrl
 
     // keys in runtimeConfig => keys in .env :=> apiSecret = env.NUXT_API_SECRET
-    apiSecret: process.env.NUXT_API_SECRET, // ! as apiSecret ib Not public - it can be accessed ONLY on SERVER side by useRuntimeConfig().apiSecret
+    apiSecret: process.env.NUXT_API_SECRET, // ! as apiSecret is Not public - it can be accessed ONLY on SERVER side by useRuntimeConfig().apiSecret
 
     // public.baseUrl = env.NUXT_PUBLIC_BASE_URL
     // public.theme = env.NUXT_PUBLIC_THEME

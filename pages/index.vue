@@ -1,13 +1,19 @@
 <template>
   <div class="home-page">
-    <AppSpinner v-if="counterStore.count === 3" />
+    <AppSpinner v-if="is_loading" />
+
+    <div v-if="dog_img_src">
+      <h3>Secret Dog Image</h3>
+
+      <NuxtImg :src="dog_img_src" width="200" height="200" alt="Dog image" loading="lazy" />
+    </div>
 
     <AppButtonText class="home-page__counter-button" @click="handleClick">Counter++</AppButtonText>
 
     <h3 class="home-page__counter">count is: {{ counterStore.count }}</h3>
     <h3 class="home-page__double-counter">doubleCount is: {{ counterStore.doubleCount }}</h3>
 
-    <AppButtonText class="home-page__counter-button" @click="counterStore.count = 0"
+    <AppButtonText class="home-page__counter-button" @click="resetCounter"
       >Reset Counter</AppButtonText
     >
 
@@ -131,11 +137,11 @@ const config = useRuntimeConfig()
 
 const apiSecret = config.apiSecret // undefined on client side
 
+console.log('apiSecret', apiSecret)
+
 const theme = config.public.theme // gets default value from nuxt.config.ts file from runtimeConfig.public.theme as there is no NUXT_PUBLIC_THEME in .env file
 const apiBase = config.public.apiBase // gets the NUXT_PUBLIC_API_BASE value from .env file and overrides default value in nuxt.config.ts file in runtimeConfig.public.apiBase
 const baseUrl = config.public.baseUrl // gets the runtimeConfig.public.baseUrl value from nuxt.config.ts file as it is = process.env.NUXT_PUBLIC_BASE_URL
-
-console.log('apiSecret', apiSecret)
 
 console.log('theme', theme)
 console.log('apiBase', apiBase)
@@ -152,10 +158,41 @@ const color = computed(() => {
 const counter_color = computed(() => color.value.counter)
 const double_counter_color = computed(() => color.value.double_counter)
 
-const handleClick = () => {
+const dog_img_src = ref('')
+const is_loading = ref(false)
+
+const handleClick = async () => {
   // counterStore.increment('a') // for type checking
 
-  counterStore.increment(3)
+  counterStore.increment(1)
+
+  if (dog_img_src.value) {
+    return
+  }
+
+  interface SecretData {
+    data: { image: { jpg: string } }
+    apiSecret: string
+  }
+
+  console.log("$fetch('/api/secret-data') on @/server/api/secret-data.get")
+
+  is_loading.value = true
+
+  const data: SecretData | null = await $fetch('/api/secret-data').catch(() => null)
+
+  is_loading.value = false
+
+  if (data?.data.image.jpg) {
+    dog_img_src.value = data.data.image.jpg
+  }
+
+  console.log('data', { image: data?.data.image.jpg, apiSecret_on_server: data?.apiSecret })
+}
+
+const resetCounter = () => {
+  counterStore.count = 0
+  dog_img_src.value = ''
 }
 
 const onHydrate = (hydrated_on: string) => {
