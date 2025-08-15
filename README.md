@@ -261,6 +261,45 @@ export default defineNuxtConfig({
 `process.env.NUXT_API_SECRET` => undefined on client side
 `process.env.NUXT_PUBLIC_API_BASE` => undefined on client side
 
+# Nuxt Composables [=>](https://nuxt.com/docs/3.x/api/composables/use-app-config)
+
+- [onPrehydrate](https://nuxt.com/docs/3.x/api/composables/on-prehydrate): to run a callback on the client immediately before Nuxt hydrates the page.
+- [useAppConfig](https://nuxt.com/docs/3.x/api/composables/use-app-config): access the reactive app config defined in the project.
+- [useAsyncData](https://nuxt.com/docs/3.x/api/composables/use-async-data): provides access to data that resolves asynchronously in an SSR-friendly composable.
+  - **_useAsyncData_** is a composable meant to be called directly in the Nuxt context. It returns reactive composables and handles adding responses to the Nuxt payload so they can be passed from server to client **_without re-fetching_** the data on client side when the page hydrates.
+  - **By default, useAsyncData blocks navigation** until its async handler is resolved.
+- [useCookie](https://nuxt.com/docs/3.x/api/composables/use-cookie): is an SSR-friendly composable to read and write cookies.
+- [useError](https://nuxt.com/docs/3.x/api/composables/use-error): returns the global Nuxt error that is being handled.
+- [useFetch](https://nuxt.com/docs/3.x/api/composables/use-fetch): fetch data from an API endpoint with an SSR-friendly composable.
+  - **_useFetch_** is a composable meant to be called directly in a setup function, plugin, or route middleware. It returns reactive composables and handles adding responses to the Nuxt payload so they can be passed from server to client **_without re-fetching_** the data on client side when the page hydrates.
+  - **By default, useFetch blocks navigation** until its async handler is resolved.
+- [useHead](https://nuxt.com/docs/3.x/api/composables/use-head): customizes the head properties of individual pages of your Nuxt app.
+- [useHeadSafe](https://nuxt.com/docs/3.x/api/composables/use-head-safe): the recommended way to provide head data with user input.
+- [useHydration](https://nuxt.com/docs/3.x/api/composables/use-hydration): allows full control of the hydration cycle to set and receive data from the server.
+- [useLazyAsyncData](https://nuxt.com/docs/3.x/api/composables/use-lazy-async-data): this wrapper around useAsyncData triggers navigation immediately.
+  - **_useLazyAsyncData_** provides a wrapper around `useAsyncData` that **triggers navigation before the handler is resolved.**
+- [useLazyFetch](https://nuxt.com/docs/3.x/api/composables/use-lazy-fetch): this wrapper around useFetch triggers navigation immediately.
+  - **_useLazyFetch_** provides a wrapper around `useFetch` that **triggers navigation before the handler is resolved.**
+- [useLoadingIndicator](https://nuxt.com/docs/3.x/api/composables/use-loading-indicator): this composable gives you access to the loading state of the app page.
+- [useNuxtApp](https://nuxt.com/docs/3.x/api/composables/use-nuxt-app): access the shared runtime context of the Nuxt Application.
+- [useNuxtData](https://nuxt.com/docs/3.x/api/composables/use-nuxt-data): access the current cached value of data fetching composables.
+  - **_useNuxtData_** gives you access to the current cached value of `useAsyncData`, `useLazyAsyncData`, `useFetch` and `useLazyFetch` with explicitly provided key.
+- [usePreviewMode](https://nuxt.com/docs/3.x/api/composables/use-preview-mode): to check and control preview mode in Nuxt.
+- [useRequestEvent](https://nuxt.com/docs/3.x/api/composables/use-request-event): access the incoming request event with the useRequestEvent composable.
+- [useRequestFetch](https://nuxt.com/docs/3.x/api/composables/use-request-fetch): forward the request context and headers for server-side fetch requests.
+- [useRequestHeader](https://nuxt.com/docs/3.x/api/composables/use-request-header): to access a certain incoming request header.
+- [useRequestHeaders](https://nuxt.com/docs/3.x/api/composables/use-request-headers): to access the incoming request headers.
+- [useRequestURL](https://nuxt.com/docs/3.x/api/composables/use-request-url): access the incoming request URL.
+- [useResponseHeader](https://nuxt.com/docs/3.x/api/composables/use-response-header): to set a server response header.
+- [useRoute](https://nuxt.com/docs/3.x/api/composables/use-route): returns the current route.
+- [useRouteAnnouncer](https://nuxt.com/docs/3.x/api/composables/use-route-announcer): observes the page title changes and updates the announcer message accordingly.
+- [useRouter](https://nuxt.com/docs/3.x/api/composables/use-router): returns the router instance.
+- [useRuntimeConfig](https://nuxt.com/docs/3.x/api/composables/use-runtime-config): access runtime config variables.
+- [useRuntimeHook](https://nuxt.com/docs/3.x/api/composables/use-runtime-hook): registers a runtime hook in a Nuxt application and ensures it is properly disposed of when the scope is destroyed.
+- [useSeoMeta](https://nuxt.com/docs/3.x/api/composables/use-seo-meta): lets you define your site's SEO meta tags as a flat object with full TypeScript support.
+- [useServerSeoMeta](https://nuxt.com/docs/3.x/api/composables/use-server-seo-meta): lets you define your site's SEO meta tags as a flat object with full TypeScript support.
+- [useState](https://nuxt.com/docs/3.x/api/composables/use-state): creates a reactive and SSR-friendly shared state.
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

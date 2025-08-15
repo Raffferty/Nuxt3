@@ -8,6 +8,16 @@
       <NuxtImg :src="dog_img_src" width="200" height="200" alt="Dog image" loading="lazy" />
     </div>
 
+    <h3>Nuxt useState vs ref demo</h3>
+
+    <NameWithState />
+    <NameWithState />
+
+    <NameWithRef />
+    <NameWithRef />
+
+    <div class="divider" />
+
     <AppButtonText class="home-page__counter-button" @click="handleClick">Counter++</AppButtonText>
 
     <h3 class="home-page__counter">count is: {{ counterStore.count }}</h3>
