@@ -1,8 +1,8 @@
 <template>
-  <div class="default-layout">
+  <div class="users-layout">
     <AppHeader />
 
-    <h3>Default Layout</h3>
+    <h3>Users Layout</h3>
 
     <main>
       <slot />
@@ -11,17 +11,16 @@
 </template>
 
 <style lang="scss">
-.default-layout {
+.users-layout {
   min-height: 100%;
   display: flex;
   flex-direction: column;
   padding: 40px;
-  background: url('@/assets/images/bg-default.svg') no-repeat center;
-  background-size: cover;
+  background: linear-gradient(to bottom, black 0%, blue 50%, black 100%);
 
   h3 {
     margin: 0;
-    margin-top: 24px;
+    margin: 24px 0;
   }
 
   main {

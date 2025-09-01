@@ -2,6 +2,17 @@
   <div class="home-page">
     <AppSpinner v-if="is_loading" />
 
+    <AppButtonText class="home-page__counter-button" @click="handleClick">Counter++</AppButtonText>
+
+    <h3 class="home-page__counter">count is: {{ counterStore.count }}</h3>
+    <h3 class="home-page__double-counter">doubleCount is: {{ counterStore.doubleCount }}</h3>
+
+    <AppButtonText class="home-page__counter-button" @click="resetCounter"
+      >Reset Counter</AppButtonText
+    >
+
+    <div class="divider" />
+
     <div v-if="dog_img_src">
       <h3>Secret Dog Image</h3>
 
@@ -15,17 +26,6 @@
 
     <NameWithRef />
     <NameWithRef />
-
-    <div class="divider" />
-
-    <AppButtonText class="home-page__counter-button" @click="handleClick">Counter++</AppButtonText>
-
-    <h3 class="home-page__counter">count is: {{ counterStore.count }}</h3>
-    <h3 class="home-page__double-counter">doubleCount is: {{ counterStore.doubleCount }}</h3>
-
-    <AppButtonText class="home-page__counter-button" @click="resetCounter"
-      >Reset Counter</AppButtonText
-    >
 
     <div class="divider" />
     <!-- Dynamic Components -->

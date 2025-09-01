@@ -66,3 +66,8 @@ p {
   background-color: $color-white;
   margin: 24px 0;
 }
+
+.router-link-active {
+  color: rgb(64, 255, 0);
+  font-weight: bold;
+}
