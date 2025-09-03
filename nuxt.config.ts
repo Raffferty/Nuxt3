@@ -42,29 +42,38 @@ export default defineNuxtConfig({
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { charset: 'utf-8' },
+
+        // Windows tile background color (legacy but safe).
+        { name: 'msapplication-TileColor', content: '#2b5797' },
+
+        // Modern browser UI color (highly recommended).
+        // On mobile, it sets the color of the address bar/status bar.
+        // On desktop, Android Chrome uses it for theming the browser tab UI in some contexts.
+        { name: 'theme-color', content: '#ffffff' },
       ],
       link: [
-        { rel: 'icon', type: 'image/ico', href: '/favicon/favicon.ico' },
+        // Fallback .ico
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' },
+
+        // Modern SVG
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon/favicon.svg' },
+
+        // PNG favicons
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon/favicon-32x32.png' },
-        {
-          rel: 'icon',
-          type: 'image/png',
-          sizes: '512x512',
-          href: '/favicon/android-chrome-512x512.png',
-        },
-        {
-          rel: 'icon',
-          type: 'image/png',
-          sizes: '192x192',
-          href: '/favicon/android-chrome-192x192.png',
-        },
-        {
-          rel: 'apple-touch-icon',
-          type: 'image/png',
-          sizes: '180x180',
-          href: '/favicon/apple-touch-icon.png',
-        },
+        { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon/favicon-96x96.png' },
+
+        // instead of this lines we use { rel: 'manifest', href: '/favicon/site.webmanifest' }
+        // { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/favicon/web-app-manifest-192x192.png',},
+        // { rel: 'icon', type: 'image/png', sizes: '512x512', href: '/favicon/web-app-manifest-512x512.png',},
+
+        // iOS homescreen
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png' },
+
+        // PWA manifest
+        { rel: 'manifest', href: '/favicon/site.webmanifest' },
+
+        // Fonts
         {
           rel: 'preload',
           as: 'font',
