@@ -1,6 +1,7 @@
 <script setup>
 // definePageMeta() is a compiler-hint helper that is only usable inside the script block of a single file component which is also a page.
 definePageMeta({
+  title: 'All users',
   layout: 'users',
   middleware: 'users',
 })

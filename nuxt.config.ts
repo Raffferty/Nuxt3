@@ -34,14 +34,16 @@ export default defineNuxtConfig({
     dirs: [],
   }, */
   app: {
+    // It's good practice to set tags in head that won't change such as your site title default, language and favicon.
     head: {
       title: 'Nuxt3 Tutorial',
       htmlAttrs: {
         lang: 'en',
       },
       meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { charset: 'utf-8' },
+        //  these are st by default
+        // { name: 'viewport', content: 'width=device-width, initial-scale=1' }, // This controls how your page scales on mobile devices.
+        // { charset: 'utf-8' },
 
         // Windows tile background color (legacy but safe).
         { name: 'msapplication-TileColor', content: '#2b5797' },
