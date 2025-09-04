@@ -7,15 +7,15 @@
 </template>
 
 <script setup lang="ts">
-// we don't definePageMeta.layout = 'users' as we have wrapper <NuxtPage /> in pages/users.vue
+// to not write definePageMeta.layout = 'users' in every page under the /users we use users-layout.global.ts middleware
 definePageMeta({
+  // layout: 'users',
   title: 'User page',
   validate: async (route) => {
     // Check if the id is made up of digits
     // If you return false, this will cause a 404 error.
     return typeof route.params.id === 'string' && /^\d+$/.test(route.params.id)
   },
-  //   layout: 'users',
 })
 
 const route = useRoute()

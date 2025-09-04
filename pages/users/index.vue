@@ -15,16 +15,23 @@
 </template>
 
 <script setup lang="ts">
-// we don't definePageMeta.layout = 'users' as we have wrapper <NuxtPage /> in pages/users.vue
+// to not write definePageMeta.layout = 'users' in every page under the /users we use users-layout.global.ts middleware
 definePageMeta({
+  // layout: 'users',
   title: 'Users page',
   redirect: '/users/company',
-  //   layout: 'users',
+  middleware: 'users',
 })
 
-const { data: user } = await useFetch<{ name: string; address: { street: string } }>(
+const { data: user, execute } = await useFetch<{ name: string; address: { street: string } }>(
   'https://jsonplaceholder.typicode.com/users/1',
+  { immediate: false },
 )
+
+// fetch after 2s delay
+setTimeout(() => {
+  execute()
+}, 2000)
 </script>
 
 <style lang="scss">
