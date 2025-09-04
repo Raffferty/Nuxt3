@@ -16,6 +16,27 @@ definePageMeta({
     // If you return false, this will cause a 404 error.
     return typeof route.params.id === 'string' && /^\d+$/.test(route.params.id)
   },
+
+  // this sets the transition named 'rotate' for current page (css is defined in app.vue)
+  /* pageTransition: {
+    name: 'rotate',
+  }, */
+
+  // using JS hooks in pageTransition:
+  pageTransition: {
+    name: 'rotate', // css is defined in app.vue
+    mode: 'out-in',
+    onBeforeEnter: (el) => {
+      console.log('Before enter... el.tagName', el.tagName)
+    },
+    onEnter: (el, done) => {
+      console.log('onEnter enter...el.tagName', el.tagName)
+      console.log('onEnter enter...done', done())
+    },
+    onAfterEnter: (el) => {
+      console.log('onAfterEnter enter... el.tagName', el.tagName)
+    },
+  },
 })
 
 const route = useRoute()

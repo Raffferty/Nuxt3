@@ -105,6 +105,12 @@ export default defineNuxtConfig({
         { textContent: 'JavaScript is required' },
       ],
     },
+
+    // this sets the transition named 'page' between the pages (css is defined in app.vue)
+    pageTransition: { name: 'page', mode: 'out-in' },
+
+    // this sets the transition named 'layout' between the layouts (css is defined in app.vue)
+    layoutTransition: { name: 'layout', mode: 'out-in' },
   },
   css: ['@/assets/scss/main.scss'],
   vite: {

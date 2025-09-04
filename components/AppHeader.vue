@@ -5,7 +5,10 @@
     </NuxtLink>
     <div class="links">
       <NuxtLink to="/">Home</NuxtLink>
-      <NuxtLink to="/users">Users</NuxtLink>
+      <!-- :class="{ 'router-link-active': $route.path.startsWith('/users') } for dinamic route /users/1 ... shown in [id].vue -->
+      <NuxtLink to="/users/" :class="{ 'router-link-active': $route.path.startsWith('/users') }"
+        >Users</NuxtLink
+      >
       <NuxtLink to="/posts">Posts</NuxtLink>
       <NuxtLink to="/posts/my-slug">Posts + [[slug]]</NuxtLink>
     </div>
