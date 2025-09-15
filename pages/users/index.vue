@@ -23,10 +23,41 @@ definePageMeta({
   middleware: 'users',
 })
 
-const { data: user, execute } = await useFetch<{ name: string; address: { street: string } }>(
-  'https://jsonplaceholder.typicode.com/users/1',
-  { immediate: false },
-)
+interface User {
+  name: string
+  address: { street: string }
+  company: {
+    name: string
+    catchPhrase: string
+    bs: string
+  }
+}
+
+const { data: users } = useNuxtData('users')
+console.log('Boolean(users.value)', Boolean(users.value))
+
+// as we have 'await useFetch' here - the navigation to this page will wait until fetching is ended
+// and in app.vue the NuxtLoadingIndicator will be shown
+// if we set 'lazy: true'
+// or if we use 'useLazyFetch'
+// or if we don't use 'await'
+// the navigation won't be blocked!
+if (!users.value) {
+  await useFetch('/api/users', {
+    key: 'users', // important: allows reuse via useNuxtData
+    // lazy: true,
+    // server: false,
+  })
+}
+
+const { data: user, execute } = useFetch<User>('/api/users/1', {
+  immediate: false,
+  pick: ['name', 'address', 'company'], // to minimize the payload size
+  transform: (user) => {
+    // to alter the result of the query.
+    return { ...user, name: `transformed name: ${user.name}!` }
+  },
+})
 
 // fetch after 2s delay
 setTimeout(() => {

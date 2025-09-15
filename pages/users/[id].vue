@@ -43,16 +43,13 @@ const route = useRoute()
 console.log('route.params.id', route.params.id)
 
 const { data: users } = useNuxtData('users')
+console.log('id Boolean(users.value)', Boolean(users.value))
 
 if (!users.value) {
-  console.log('id !users.value')
-
-  const { data } = await useFetch('https://jsonplaceholder.typicode.com/users', { key: 'users' })
+  const { data } = await useFetch('/api/users', { key: 'users' })
 
   users.value = data.value || []
 }
-
-console.log('users.value', users.value)
 
 const user = users.value.find((user: { id: string }) => user.id == route.params.id)
 

@@ -95,6 +95,7 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 // AppButtonText is explicitly imported to use in '<component :is="AppButtonText" />'
 // We can explicitly import components from #components if you want or need to bypass Nuxt's auto-importing functionality.
 import { AppButtonText, AppSpinner } from '#components'
@@ -159,6 +160,16 @@ console.log('baseUrl', baseUrl)
 
 const counterStore = useCounterStore()
 
+// the destructured property from Pinia to be reactive we have to wrap counterStore in storeToRefs
+// othewise const { count } is only the value and is not reactive
+const { count } = storeToRefs(counterStore)
+
+// or we have to make them as computed
+const count2 = computed(() => counterStore.count)
+
+console.log('1 count', count.value)
+console.log('1 count2', count2.value)
+
 const color = computed(() => {
   return counterStore.count % 2 == 0
     ? { counter: 'green', double_counter: 'red' }
@@ -175,6 +186,10 @@ const handleClick = async () => {
   // counterStore.increment('a') // for type checking
 
   counterStore.increment(1)
+
+  console.log('2 count', count.value)
+  console.log('3 counterStore.count', counterStore.count)
+  console.log('4 count2', count2.value)
 
   if (dog_img_src.value) {
     return

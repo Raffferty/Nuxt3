@@ -50,6 +50,7 @@ p {
     #9348fc 69.91%,
     #3094ff 107.1%
   );
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -68,6 +69,6 @@ p {
 }
 
 .router-link-active {
-  color: rgb(64, 255, 0);
+  color: #40ff00;
   font-weight: bold;
 }

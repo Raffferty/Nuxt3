@@ -1,8 +1,12 @@
 <template>
-  <button class="app-button-text" type="button">
+  <button class="app-button-text" type="button" :disabled>
     <slot />
   </button>
 </template>
+
+<script setup lang="ts">
+const { disabled = false } = defineProps<{ disabled?: boolean }>()
+</script>
 
 <style lang="scss">
 .app-button-text {
@@ -14,10 +18,17 @@
   font-weight: bold;
   background-color: $color-blue-1;
   color: $color;
+  user-select: none;
+
   @include transition(background-color);
 
   @include hover-supported {
     background-color: $color-blue-5;
+  }
+
+  &[disabled] {
+    background-color: gray;
+    pointer-events: none;
   }
 }
 </style>

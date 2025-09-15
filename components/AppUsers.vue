@@ -3,15 +3,15 @@ const pendingFetch = ref(false)
 const errorFetch = ref(null)
 
 const { data: users } = useNuxtData('users')
+console.log('AppUsers Boolean(users.value)', Boolean(users.value))
 
 /**
  * This fetches the data on first load and provides a key ("users")
  */
 if (!users.value) {
-  console.log('!users.value')
-
-  const { data, pending, error } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+  const { data, pending, error } = await useFetch('api/users', {
     key: 'users', // important: allows reuse via useNuxtData
+    lazy: true,
   })
 
   users.value = data.value || []

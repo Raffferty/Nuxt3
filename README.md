@@ -294,7 +294,7 @@ export default defineNuxtConfig({
 
 ## [useAppConfig](https://nuxt.com/docs/3.x/api/composables/use-app-config): access the reactive app config defined in the project.
 
-## [<bold-red>useAsyncData</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-async-data): provides access to data that resolves asynchronously in an SSR-friendly composable.
+## [<bold-red>useAsyncData</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-async-data): provides access to data that resolves asynchronously in an SSR-friendly composable. Blocks the navigation if used with `await` and blocks initial page loading (no matter the `await`).
 
 ### **_useAsyncData_** is a composable meant to be called directly in the Nuxt context. It returns reactive composables and handles adding responses to the Nuxt payload so they can be passed from server to client **_without re-fetching_** the data on client side when the page hydrates.
 
@@ -304,7 +304,7 @@ export default defineNuxtConfig({
 
 ## [useError](https://nuxt.com/docs/3.x/api/composables/use-error): returns the global Nuxt error that is being handled.
 
-## [<bold-red>useFetch</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-fetch): fetch data from an API endpoint with an SSR-friendly composable.
+## [<bold-red>useFetch</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-fetch): fetch data from an API endpoint with an SSR-friendly composable. Blocks the navigation if used with `await` and blocks initial page loading (no matter the `await`).
 
 ### **_useFetch_** is a composable meant to be called directly in a setup function, plugin, or route middleware. It returns reactive composables and handles adding responses to the Nuxt payload so they can be passed from server to client **_without re-fetching_** the data on client side when the page hydrates.
 
@@ -316,11 +316,11 @@ export default defineNuxtConfig({
 
 ## [useHydration](https://nuxt.com/docs/3.x/api/composables/use-hydration): allows full control of the hydration cycle to set and receive data from the server.
 
-## [useLazyAsyncData](https://nuxt.com/docs/3.x/api/composables/use-lazy-async-data): this wrapper around useAsyncData triggers navigation immediately.
+## [<bold-red>useLazyAsyncData</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-lazy-async-data): this wrapper around useAsyncData, doesnt respect `await`, triggers navigation immediately. Exept on INITIAL `(SSR)` loading! To not block initial page loading with useLazyFetch should be set `{ server: false }`
 
 ### **_useLazyAsyncData_** provides a wrapper around `useAsyncData` that **triggers navigation before the handler is resolved.**
 
-## [useLazyFetch](https://nuxt.com/docs/3.x/api/composables/use-lazy-fetch): this wrapper around useFetch triggers navigation immediately.
+## [<bold-red>useLazyFetch</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-lazy-fetch): this wrapper around useFetch, doesnt respect `await`, triggers navigation immediately. Exept on INITIAL `(SSR)` loading! To not block initial page loading with useLazyFetch should be set `{ server: false }`
 
 ### **_useLazyFetch_** provides a wrapper around `useFetch` that **triggers navigation before the handler is resolved.**
 

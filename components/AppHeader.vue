@@ -10,7 +10,8 @@
         >Users</NuxtLink
       >
       <NuxtLink to="/posts">Posts</NuxtLink>
-      <NuxtLink to="/posts/my-slug">Posts + [[slug]]</NuxtLink>
+      <NuxtLink to="/posts/2">Post + [[slug]]</NuxtLink>
+      <NuxtLink to="/albums">Albums + Pinia</NuxtLink>
     </div>
   </header>
 </template>
