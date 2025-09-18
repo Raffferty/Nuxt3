@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import type { User } from '@/types/user'
 // to not write definePageMeta.layout = 'users' in every page under the /users we use users-layout.global.ts middleware
 definePageMeta({
   // layout: 'users',
@@ -22,16 +23,6 @@ definePageMeta({
   redirect: '/users/company',
   middleware: 'users',
 })
-
-interface User {
-  name: string
-  address: { street: string }
-  company: {
-    name: string
-    catchPhrase: string
-    bs: string
-  }
-}
 
 const { data: users } = useNuxtData('users')
 console.log('Boolean(users.value)', Boolean(users.value))
@@ -43,7 +34,7 @@ console.log('Boolean(users.value)', Boolean(users.value))
 // or if we don't use 'await'
 // the navigation won't be blocked!
 if (!users.value) {
-  await useFetch('/api/users', {
+  await useFetch<User[]>('/api/users', {
     key: 'users', // important: allows reuse via useNuxtData
     // lazy: true,
     // server: false,

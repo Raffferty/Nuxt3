@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Post } from '@/types/post'
 const route = useRoute()
 
 const slug = route.params.slug
@@ -33,13 +34,6 @@ useSeoMeta({
   description: `Details about posts ${slug}`,
   ogTitle: slug ? `Posts - ${slug}` : 'Posts',
 })
-
-interface Post {
-  id: number
-  userId: number
-  title: string
-  body: string
-}
 
 const testReFetch = ref(1)
 

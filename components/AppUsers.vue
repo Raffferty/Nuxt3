@@ -1,6 +1,9 @@
-<script setup>
+<script setup lang="ts">
+import type { FetchError } from 'ofetch'
+import type { User } from '@/types/user'
+
 const pendingFetch = ref(false)
-const errorFetch = ref(null)
+const errorFetch = ref<FetchError<unknown> | null>(null)
 
 const { data: users } = useNuxtData('users')
 console.log('AppUsers Boolean(users.value)', Boolean(users.value))
@@ -9,7 +12,7 @@ console.log('AppUsers Boolean(users.value)', Boolean(users.value))
  * This fetches the data on first load and provides a key ("users")
  */
 if (!users.value) {
-  const { data, pending, error } = await useFetch('api/users', {
+  const { data, pending, error } = await useFetch<User[]>('api/users', {
     key: 'users', // important: allows reuse via useNuxtData
     lazy: true,
   })
@@ -24,7 +27,7 @@ if (!users.value) {
   <div class="users">
     <h2>Users</h2>
     <div v-if="pendingFetch">Loading...</div>
-    <div v-else-if="errorFetch">Error: {{ error.message }}</div>
+    <div v-else-if="errorFetch">Error: {{ errorFetch.message }}</div>
     <ul v-else>
       <!-- <NuxtLink v-for="user in users" :key="user.id" :to="`/users/${user.id}`"> -->
       <NuxtLink

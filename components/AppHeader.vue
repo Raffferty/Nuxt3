@@ -12,6 +12,8 @@
       <NuxtLink to="/posts">Posts</NuxtLink>
       <NuxtLink to="/posts/2">Post + [[slug]]</NuxtLink>
       <NuxtLink to="/albums">Albums + Pinia</NuxtLink>
+      <NuxtLink to="/custom-fetch">Custom fetch</NuxtLink>
+      <NuxtLink to="/login">Login</NuxtLink>
     </div>
   </header>
 </template>
@@ -32,10 +34,32 @@ header {
   .links {
     flex-grow: 1;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 24px;
+    padding-bottom: 24px;
     border-bottom: 1px solid white;
+
+    @include respond(xl) {
+      justify-content: start;
+    }
+
+    a {
+      padding: 0 8px;
+      border: 1px solid white;
+      transition: background-color 0.5s;
+
+      &.router-link-active {
+        border-color: #40ff00;
+      }
+
+      @include hover-supported() {
+        &:hover:not(.router-link-active) {
+          background-color: #2aa102;
+        }
+      }
+    }
   }
 
   a {

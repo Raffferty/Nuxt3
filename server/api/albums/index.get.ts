@@ -1,4 +1,5 @@
 import { sleep } from '@/utils/sleep'
+import type { Album } from '@/types/album'
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
@@ -10,5 +11,5 @@ export default defineEventHandler(async (event) => {
 
   await sleep(2000)
 
-  return await $fetch(url)
+  return await $fetch<Album[]>(url)
 })

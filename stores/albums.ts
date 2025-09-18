@@ -24,7 +24,7 @@ export const useAlbumsStore = defineStore('albums', () => {
   const allAlbums = computed(() => albumsData.value?.slice(0, 10) ?? [])
 
   const lastFetched = ref<number | null>(null)
-  const ttl = 1000 * 10 // time to live
+  const ttl = 10 * 1000 // time to live
 
   async function ensureLoaded() {
     get_error.value = false

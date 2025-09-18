@@ -139,6 +139,7 @@ export default defineNuxtConfig({
     public: {
       // the value of baseUrl is taken from process.env.NUXT_PUBLIC_BASE_URL of the served (or built, or generated) .env file
       baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
+      baseUrlNuxtApi: process.env.NUXT_BASE_URL_TO_NUXT_API,
 
       //! the default values will be overriden by appropriate values from .env file served by LOCAL server:
       // for example: nuxt dev --dotenv .env.development.local

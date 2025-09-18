@@ -386,7 +386,50 @@ export default defineNuxtConfig({
 
 ## [defineNuxtComponent](https://nuxt.com/docs/3.x/api/utils/define-nuxt-component): defineNuxtComponent() is a helper function for defining type safe components with Options API.
 
-## [defineNuxtPlugin](https://nuxt.com/docs/3.x/api/utils/define-nuxt-plugin): defineNuxtPlugin() is a helper function for creating Nuxt plugins.
+## [<bold-red>defineNuxtPlugin</bold-red>](https://nuxt.com/docs/3.x/api/utils/define-nuxt-plugin): defineNuxtPlugin() is a helper function for creating Nuxt plugins.
+
+#### Nuxt automatically reads the files in the plugins/ directory and loads them at the creation of the Vue application.
+
+### Object Syntax Plugins
+
+```js
+export default defineNuxtPlugin({
+  name: 'my-plugin',
+  enforce: 'pre', // or 'post'
+  async setup(nuxtApp) {
+    // this is the equivalent of a normal functional plugin
+  },
+  hooks: {
+    // You can directly register Nuxt app runtime hooks here
+    'app:created'() {
+      const nuxtApp = useNuxtApp()
+      // do something in the hook
+    },
+  },
+  env: {
+    // Set this value to `false` if you don't want the plugin to run when rendering server-only or island components.
+    islands: true,
+  },
+})
+```
+
+### Function Syntax Plugins
+
+```js
+export default defineNuxtPlugin(() => {
+  return {
+    provide: {
+      hello: (msg: string) => `Hello ${msg}!`
+    }
+  }
+})
+```
+
+### Using in component
+
+```js
+const { $hello } = useNuxtApp()
+```
 
 ## [defineNuxtRouteMiddleware](https://nuxt.com/docs/3.x/api/utils/define-nuxt-route-middleware): Create named route middleware using defineNuxtRouteMiddleware helper function.
 

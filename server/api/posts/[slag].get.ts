@@ -1,4 +1,5 @@
 import { sleep } from '@/utils/sleep'
+import type { Post } from '@/types/post'
 
 export default defineEventHandler(async (event) => {
   const slag = getRouterParam(event, 'slag') // from /api/user/:slag
@@ -12,5 +13,5 @@ export default defineEventHandler(async (event) => {
 
   await sleep(2000)
 
-  return await $fetch(`https://jsonplaceholder.typicode.com/posts/${slag}`)
+  return await $fetch<Post>(`https://jsonplaceholder.typicode.com/posts/${slag}`)
 })
