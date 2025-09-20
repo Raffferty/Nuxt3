@@ -68,3 +68,18 @@ $breakpoints: (
     }
   }
 }
+
+@mixin text-overflow() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin webkit-line-clamp($line-height, $line-clamp) {
+  line-height: $line-height;
+  max-height: $line-height * $line-clamp;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $line-clamp;
+  -webkit-box-orient: vertical;
+}

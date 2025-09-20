@@ -1,0 +1,86 @@
+$input-font-size: 16px;
+$input-line-height: 24px;
+$input-font-weight: 400;
+
+$input-gap-y: 2px;
+$input-gap-x: 8px;
+
+$input-label-font-size: 10px;
+$input-label-line-height: 12px;
+$input-label-font-weight: 600;
+
+$input-notes-error-font-size: 12px;
+$input-notes-error-line-height: 14px;
+$input-notes-error-font-weight: $input-font-weight; // 400
+$input-notes-error-offset: $input-gap-y; //2px
+
+$input-padding-y: 5px;
+$input-padding-x: 16px;
+
+$input-border-width: 1px;
+$input-border-radius: 4px;
+
+$input-icon-size: 24px;
+
+$input-btn-clearable-size: 16px;
+
+$input-transition-delay: 0.2s;
+$input-opacity--disabled: 0.4;
+
+$color-input-text: blue;
+$color-input-icon: $color-input-text; // #505254
+$color-input-label: rgba(#505254, 0.5);
+$color-input-notes: #999;
+$color-input-error: #ff2b00;
+$color-input-border: rgba(#505254, 0.5);
+$color-input-border--focused: #0079ff;
+$color-input-background: #fff;
+
+$input-min-height: $input-label-line-height + $input-gap-y + $input-line-height + 2 *
+  $input-padding-y;
+
+$input-dd-offset: 4px;
+
+$input-dd-header-font-size: 18px;
+$input-dd-header-line-height: 28px;
+$input-dd-header-font-weight: 600;
+
+$input-dd-item-font-weight--active: 600;
+
+$input-dd-gap-x: $input-gap-x; // 8px
+
+$input-dd-padding-y: 8px;
+$input-dd-padding-x: 16px;
+
+$input-dd-header-gap: 32px;
+
+$input-dd-item-gap: 4px;
+$input-dd-item-size: 40px;
+$input-dd-header-size: 36px;
+
+$color-input-dd-btn: $color-input-text; // #505254
+$color-input-dd-btn--hover: #000;
+$color-input-dd-btn--active: $color-input-dd-btn--hover; // #000
+
+$color-input-dd-item: $color-input-text; // #505254
+$color-input-dd-item-offset: rgba($color-input-text, 0.4); // rgba(#505254, .4)
+$color-input-dd-item--hover: $color-input-dd-item; // #505254
+$color-input-dd-item--active: #0053d4;
+
+$color-input-dd-item-background--hover: rgba(#cce0ff, 0.2);
+$color-input-dd-item-background--active: rgba(#cce0ff, 0.4);
+
+$color-input-dd-item-border-radius: $input-border-radius; // 4px
+
+$color-input-dd-header: #00307b;
+
+$color-input-dd-separator: rgba(#cce0ff, 0.5);
+
+$color-input-dd-cell-background--hover: #ecf4ff;
+$color-input-dd-cell-background--active: #cce0ff;
+$color-input-dd-cell-range-between-background: $color-input-dd-cell-background--hover; // #ECF4FF
+
+$color-input-dd-scrollbar: $color-input-background; // #fff
+$color-input-dd-scrollbar-thumb: #cdcfd0;
+
+$input-dd-box-shadow: 0 4px 16px 0 rgba(#000, 0.08);

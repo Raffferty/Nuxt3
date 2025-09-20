@@ -52,17 +52,18 @@ const postsToShow = computed(() => (posts.value && !slug ? posts.value.slice(0, 
 // both useLazyFetch and useFetch block the page on INITIAL (SSR) loading - no matter await is present or not
 const { pending, error } = useLazyFetch(
   // () => (slug ? `/api/posts/${slug}?${testReFetch.value}` : '/api/posts'), // to refetch shouldn't be key
-  slug ? `/api/posts/${slug}?${testReFetch.value}` : '/api/posts', // this doesn't refetch despite testReFetch.value
+  slug ? () => `/api/posts/${slug}?${testReFetch.value}` : '/api/posts', // this doesn't refetch despite testReFetch.value
   {
     key: slug ? `posts-${slug}` : 'posts',
     // key: () => (slug ? `posts-${slug}-${testReFetch.value}` : 'posts'), // here testReFetch is reactive and will refetch when it changes
     // watch: false, // if we don't want to wathch and refetch
+    watch: [testReFetch],
     // server: false, // if we don't want to block the page on INITIAL (SSR) loading, as both useLazyFetch and useFetch block the page on SSR
     // lazy: true // used with useFetch is the same as useLazyFetch
   },
 )
 
-if (!error) {
+if (slug) {
   setTimeout(() => {
     testReFetch.value = 2
   }, 5000)

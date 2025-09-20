@@ -195,24 +195,31 @@ const handleClick = async () => {
     return
   }
 
-  interface SecretData {
-    data: { image: { jpg: string } }
-    apiSecret: string
-  }
-
   console.log("$fetch('/api/secret-data') on @/server/api/secret-data.get")
 
   is_loading.value = true
 
+  interface SecretData {
+    data?: { image: { jpg: string } }
+    apiSecret?: string
+    cookies?: Record<string, unknown>
+    auth_user?: { user: number }
+  }
+
   const data: SecretData | null = await $fetch('/api/secret-data').catch(() => null)
+
+  console.log('data', {
+    image: data?.data?.image?.jpg,
+    apiSecret_on_server: data?.apiSecret,
+    cookies: data?.cookies,
+    auth_user: data?.auth_user,
+  })
 
   is_loading.value = false
 
-  if (data?.data.image.jpg) {
+  if (data?.data?.image?.jpg) {
     dog_img_src.value = data.data.image.jpg
   }
-
-  console.log('data', { image: data?.data.image.jpg, apiSecret_on_server: data?.apiSecret })
 }
 
 const resetCounter = () => {

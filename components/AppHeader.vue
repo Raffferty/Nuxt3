@@ -13,12 +13,14 @@
       <NuxtLink to="/posts/2">Post + [[slug]]</NuxtLink>
       <NuxtLink to="/albums">Albums + Pinia</NuxtLink>
       <NuxtLink to="/custom-fetch">Custom fetch</NuxtLink>
-      <NuxtLink to="/login">Login</NuxtLink>
+      <NuxtLink to="/profile">Profile / {{ user ? 'Logout' : 'Login' }}</NuxtLink>
     </div>
   </header>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const user = useCookie<{ name: string } | null>('user')
+</script>
 
 <style scoped lang="scss">
 header {
