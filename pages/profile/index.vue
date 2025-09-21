@@ -1,6 +1,23 @@
 <template>
-  <div style="margin-top: 24px">
-    <h2 style="color: aquamarine">Auth with useCookie</h2>
+  <div style="margin-top: 24px" class="app-profile">
+    <div class="app-profile__title-container">
+      <h2 style="color: aquamarine">Auth with useCookie</h2>
+      <Icon v-if="!user" name="app-icon:spinner-wind-toy" class="app-profile__icon icon--spinner" />
+    </div>
+
+    <template v-if="!user">
+      <Icon name="app-icon:home" class="app-profile__icon icon--home" mode="svg" />
+      <Icon name="app-icon:clock" class="app-profile__icon" mode="css" />
+      <Icon name="uil:apple-alt" class="app-profile__icon" />
+      <Icon name="app-icon:eye" class="app-profile__icon icon--eye" />
+      <Icon name="app-icon:eye-off" class="app-profile__icon icon--eye" />
+
+      <!-- Collection material-symbols is not found locally -->
+      <!-- We suggest to install it to provide the best end-user experience. -->
+      <!-- npm i -D @iconify-json/material-symbols -->
+      <!-- https://icones.js.org/collection/material-symbols?category=Maps&icon=material-symbols:add-location-outline-rounded -->
+      <Icon name="material-symbols:add-location-outline-rounded" class="app-profile__icon" />
+    </template>
 
     <template v-if="user">
       <h2>Welcome, {{ user.name }}! 👋</h2>
@@ -37,10 +54,21 @@
       <AppInput
         ref="input"
         v-model="name"
-        style="max-width: 300px"
+        :type="input_type"
+        class="app-profile__input"
+        icon="app-icon:avatar"
+        notes="*** input notes"
         placeholder="Enter your name..."
         @keypress.enter="login()"
-      />
+      >
+        <template #field-after>
+          <Icon
+            :name="input_type == 'password' ? 'app-icon:eye' : 'app-icon:eye-off'"
+            class="app-profile__input--icon"
+            @click="input_type == 'password' ? (input_type = 'text') : (input_type = 'password')"
+          />
+        </template>
+      </AppInput>
 
       <AppButtonText
         style="margin-top: 32px; display: block"
@@ -62,6 +90,8 @@ const logins = useCookie<number>('logins')
 
 const name = ref('')
 const input = useTemplateRef('input')
+
+const input_type = ref('password')
 
 const login = () => {
   logins.value = (logins.value || 0) + 1
@@ -87,4 +117,56 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.app-profile {
+  &__title-container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__icon {
+    font-size: 50px;
+    margin: 0 24px 24px 0;
+
+    &.icon--home {
+      color: red;
+    }
+    &.icon--eye {
+      color: yellow;
+    }
+
+    &.icon--spinner {
+      font-size: 60px;
+      animation-name: color-change;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+
+      @keyframes color-change {
+        0% {
+          color: #00ddff;
+        }
+        50% {
+          color: #0dff00;
+        }
+        100% {
+          color: #eaff00;
+        }
+      }
+    }
+  }
+
+  &__input {
+    max-width: 300px;
+
+    &--icon {
+      font-size: 24px;
+
+      @include hover-supported {
+        cursor: pointer;
+      }
+    }
+  }
+}
+</style>

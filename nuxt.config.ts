@@ -2,7 +2,16 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', '@nuxt/image', '@nuxt/eslint'],
+  modules: ['@pinia/nuxt', '@nuxt/image', '@nuxt/eslint', '@nuxt/icon'],
+  icon: {
+    provider: 'server',
+    customCollections: [
+      {
+        prefix: 'app-icon',
+        dir: './assets/icons',
+      },
+    ],
+  },
   eslint: {
     // options here
     checker: true, // ESLint checking on runing dev server

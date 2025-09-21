@@ -6,7 +6,7 @@
     @click="focus"
   >
     <div class="input">
-      <!-- <i v-if="icon" class="bi" :class="[`bi-${icon}`]" /> -->
+      <Icon v-if="icon" :name="icon" class="app-input__icon" />
 
       <div class="field">
         <div v-if="label" class="label">{{ label }}</div>
@@ -258,6 +258,11 @@ defineExpose({
   font-weight: $input-font-weight;
   text-align: left;
   position: relative;
+
+  &__icon {
+    font-size: 24px;
+    color: $color-input-border;
+  }
 
   .input {
     width: 100%;
