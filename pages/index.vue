@@ -2,6 +2,12 @@
   <div class="home-page">
     <AppSpinner v-if="is_loading" />
 
+    <NuxtLink to="/errr"
+      ><AppButtonText style="background: #8800ff">to Error page</AppButtonText></NuxtLink
+    >
+
+    <div class="divider" />
+
     <AppButtonText class="home-page__counter-button" @click="handleClick">Counter++</AppButtonText>
 
     <h3 class="home-page__counter">count is: {{ counterStore.count }}</h3>
