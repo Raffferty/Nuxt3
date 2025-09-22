@@ -7,12 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import type { User } from '@/types/user'
 // to not write definePageMeta.layout = 'users' in every page under the /users we use users-layout.global.ts middleware
 definePageMeta({
   //   layout: 'users',
   title: 'About User',
 })
 
+// type User is auto-imported from shared/types/user.ts
 const { user = null } = defineProps<{ user?: User }>()
 </script>

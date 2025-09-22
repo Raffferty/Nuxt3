@@ -13,7 +13,13 @@ my-nuxt-app/
 ├── public/
 ├── server/
 │   ├── api/
-│   └── middleware/
+│   ├── routes/
+│   ├── types/
+│   ├── middleware/
+│   └── utils/
+├── shared/
+│   ├── types/ ...direct files (not nested dirs) are auto-imported in Vue app and the Nitro server
+│   └── utils/ ...direct files (not nested dirs) are auto-imported in Vue app and the Nitro server
 ├── stores/
 ├── types/
 ├── utils/
@@ -46,6 +52,7 @@ my-nuxt-app/
 | `plugins/`           | Client/server plugins that run before app mounts.                                    |
 | `public/`            | Static files served as-is (e.g., images, robots.txt). Accessible via `/`.            |
 | `server/api/`        | API routes (server-side only, becomes `/api/*`).                                     |
+| `shared/`            | /types and /utils direct files are auto-imported in Vue app and the Nitro server     |
 | `server/middleware/` | Server middleware like authentication or custom handlers.                            |
 | `utils/` (optional)  | Utility functions (not auto-imported by default).                                    |
 | `types/` (optional)  | Type definitions and interfaces.                                                     |

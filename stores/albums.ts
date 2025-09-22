@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Album } from '@/types/album'
 
 export const useAlbumsStore = defineStore('albums', () => {
   const get_error = ref(false)
   const params = computed(() => (get_error.value ? { get_error: get_error.value } : {}))
 
+  // type Album is auto-imported from shared/types/album.ts
   const {
     data: albumsData,
     pending: loading,

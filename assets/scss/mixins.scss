@@ -83,3 +83,22 @@ $breakpoints: (
   -webkit-line-clamp: $line-clamp;
   -webkit-box-orient: vertical;
 }
+
+@mixin spinner-color-animation() {
+  animation-name: color-change;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+
+  @keyframes color-change {
+    0% {
+      color: #00ddff;
+    }
+    50% {
+      color: #0dff00;
+    }
+    100% {
+      color: #eaff00;
+    }
+  }
+}

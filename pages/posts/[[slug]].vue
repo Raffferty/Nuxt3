@@ -22,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Post } from '@/types/post'
 const route = useRoute()
 
 const slug = route.params.slug
@@ -37,6 +36,7 @@ useSeoMeta({
 
 const testReFetch = ref(1)
 
+// type Post is auto-imported from shared/types/post.ts
 const { data: posts } = useNuxtData<Post[]>('posts')
 const { data: post } = useNuxtData<Post>(`posts-${slug}`) // this `posts-${slug}` is initated only on first time
 

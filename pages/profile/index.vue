@@ -2,7 +2,11 @@
   <div style="margin-top: 24px" class="app-profile">
     <div class="app-profile__title-container">
       <h2 style="color: aquamarine">Auth with useCookie</h2>
-      <Icon v-if="!user" name="app-icon:spinner-wind-toy" class="app-profile__icon icon--spinner" />
+      <Icon
+        v-if="isWaiting && !user"
+        name="app-icon:spinner-wind-toy"
+        class="app-profile__icon icon--spinner spinner-color-animation"
+      />
     </div>
 
     <template v-if="!user">
@@ -39,9 +43,15 @@
           >{{ logins }}</b
         >
         times!
+
+        <Icon v-if="isWaiting" name="app-icon:spinner-wind-toy" class="spinner-color-animation" />
       </h3>
 
-      <AppButtonText style="margin: 32px 32px 0 0" name="Clear" @click="clearCount"
+      <AppButtonText
+        style="margin: 32px 32px 0 0"
+        name="Clear"
+        :disabled="logins == 1"
+        @click="clearCount"
         >Clear count</AppButtonText
       >
 
@@ -88,17 +98,33 @@
 const user = useCookie<{ name: string } | null>('user')
 const logins = useCookie<number>('logins')
 
+const isWaiting = ref(false)
+
 const name = ref('')
 const input = useTemplateRef('input')
 
 const input_type = ref('password')
 
-const login = () => {
+const login = async () => {
+  isWaiting.value = true
+
+  // auto-imported from shared/utils/sleep.ts
+  await sleep(1000)
+
+  isWaiting.value = false
+
   logins.value = (logins.value || 0) + 1
   user.value = { name: name.value }
 }
 
-const clearCount = () => {
+const clearCount = async () => {
+  isWaiting.value = true
+
+  // auto-imported from shared/utils/sleep.ts
+  await sleep(1000)
+
+  isWaiting.value = false
+
   logins.value = 1
   name.value = ''
 }
@@ -125,6 +151,12 @@ onMounted(() => {
     gap: 24px;
   }
 
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
   &__icon {
     font-size: 50px;
     margin: 0 24px 24px 0;
@@ -138,22 +170,6 @@ onMounted(() => {
 
     &.icon--spinner {
       font-size: 60px;
-      animation-name: color-change;
-      animation-duration: 4s;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-
-      @keyframes color-change {
-        0% {
-          color: #00ddff;
-        }
-        50% {
-          color: #0dff00;
-        }
-        100% {
-          color: #eaff00;
-        }
-      }
     }
   }
 

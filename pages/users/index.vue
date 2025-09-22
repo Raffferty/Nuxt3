@@ -15,7 +15,6 @@
 </template>
 
 <script setup lang="ts">
-import type { User } from '@/types/user'
 // to not write definePageMeta.layout = 'users' in every page under the /users we use users-layout.global.ts middleware
 definePageMeta({
   // layout: 'users',
@@ -33,6 +32,8 @@ console.log('Boolean(users.value)', Boolean(users.value))
 // or if we use 'useLazyFetch'
 // or if we don't use 'await'
 // the navigation won't be blocked!
+
+// type User is auto-imported from shared/types/user.ts
 if (!users.value) {
   await useFetch<User[]>('/api/users', {
     key: 'users', // important: allows reuse via useNuxtData
@@ -41,6 +42,7 @@ if (!users.value) {
   })
 }
 
+// type User is auto-imported from shared/types/user.ts
 const { data: user, execute } = useFetch<User>('/api/users/1', {
   immediate: false,
   pick: ['name', 'address', 'company'], // to minimize the payload size

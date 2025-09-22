@@ -1,5 +1,3 @@
-import type { User } from '@/types/user'
-
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id') // from /api/user/:id
 
@@ -12,5 +10,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  // type User is auto-imported from shared/types/user.ts
   return await $fetch<User>(`https://jsonplaceholder.typicode.com/users/${id}`)
 })
