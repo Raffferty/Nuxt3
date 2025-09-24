@@ -8,6 +8,14 @@
 
     <div class="divider" />
 
+    <NuxtLink to="/old-albums"
+      ><AppButtonText style="background: coral"
+        >Redirect /old-albums -> /albums</AppButtonText
+      ></NuxtLink
+    >
+
+    <div class="divider" />
+
     <AppButtonText class="home-page__counter-button" @click="handleClick">Counter++</AppButtonText>
 
     <h3 class="home-page__counter">count is: {{ counterStore.count }}</h3>

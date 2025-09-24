@@ -1,5 +1,25 @@
 <template>
   <div class="posts-page">
+    <pre v-if="slug">
+      routeRules: {
+        '/api/posts/*': { cache: { maxAge: 10, swr: false } },
+      }
+
+      posts/[id] page is generated on demand, after fetch is done data is cached for 10 sec and is returned from the cache
+      after 10 sec new fetch (see loading state) is done on demand and is set new cache time for next 10 sec
+      maxAge > 0
+    </pre>
+
+    <pre v-else>
+      routeRules: {
+        '/api/posts': { cache: { maxAge: 15, swr: true } },
+      }
+
+      posts page is generated on demand, cached for 15 sec
+      for newly came user after 15 sec the stale data is shown and cache is revalidated in background and only next user will see the new data
+      never see loading state except on first fetch
+    </pre>
+
     <h2>{{ slug ? 'Post with Slug' : 'Posts without Slug' }}</h2>
 
     <p v-if="slug">[[slug]]: {{ slug }}</p>
@@ -63,11 +83,12 @@ const { pending, error } = useLazyFetch(
   },
 )
 
-if (slug) {
+// to test reactive fetch when testReFetch.value is changed
+/* if (slug) {
   setTimeout(() => {
     testReFetch.value = 2
   }, 5000)
-}
+} */
 </script>
 
 <style lang="scss">

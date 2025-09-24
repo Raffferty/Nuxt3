@@ -6,6 +6,29 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@pinia/nuxt', '@nuxt/image', '@nuxt/eslint', '@nuxt/icon'],
+  routeRules: {
+    // Generated at build time for SEO purpose
+    // Prerenders routes at build time and includes them in your build as static assets
+    '/': { prerender: true },
+
+    // posts page generated on demand, cached for 15 sec + 5 sec to revalidate
+    // for newly came user after 20 sec does new fetch
+    // '/api/posts': { cache: { maxAge: 15, staleMaxAge: 5, swr: true } },
+
+    // posts page generated on demand, cached for 15 sec
+    // for newly came user after 15 sec revalidates in background and only next user will see new data
+    '/api/posts': { cache: { maxAge: 15, swr: true } },
+
+    // posts/[id] page generated on demand, after fetch is done data is cached for 10 sec and returned without new fetches
+    // after 10 sec new fetch is done on demand and is set new cache time for 10 sec
+    // maxAge > 0
+    '/api/posts/*': { cache: { maxAge: 10, swr: false } },
+
+    // Define server-side redirects: redirection to avoid 404
+    '/old-albums': {
+      redirect: { to: '/albums', statusCode: 302 },
+    },
+  },
   icon: {
     provider: 'server',
     customCollections: [

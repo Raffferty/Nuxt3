@@ -24,10 +24,17 @@ export const useAlbumsStore = defineStore('albums', () => {
   const allAlbums = computed(() => albumsData.value?.slice(0, 10) ?? [])
 
   const lastFetched = ref<number | null>(null)
-  const ttl = 10 * 1000 // time to live
+  const ttl = 20 * 1000 // time to live = 20 sec
 
   async function ensureLoaded() {
-    get_error.value = false
+    console.log('get_error.value', get_error.value)
+
+    if (get_error.value) {
+      // this run useFetch as get_error.value is in the useFetch reactive params
+      get_error.value = false
+
+      return
+    }
 
     const expired = !lastFetched.value || Date.now() - lastFetched.value > ttl
 
@@ -40,6 +47,8 @@ export const useAlbumsStore = defineStore('albums', () => {
 
   function reloadAlbums() {
     if (get_error.value) {
+      // this run useFetch as get_error.value is in the useFetch reactive params
+
       get_error.value = false
 
       return
