@@ -95,6 +95,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: 'Profile',
+})
+
 const user = useCookie<{ name: string } | null>('user')
 const logins = useCookie<number>('logins')
 

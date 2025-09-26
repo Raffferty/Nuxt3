@@ -114,6 +114,10 @@ import { storeToRefs } from 'pinia'
 // We can explicitly import components from #components if you want or need to bypass Nuxt's auto-importing functionality.
 import { AppButtonText, AppSpinner } from '#components'
 
+definePageMeta({
+  title: 'Home',
+})
+
 // For using in '<component :is="..." />'
 const MyButton = resolveComponent('AppButtonText')
 

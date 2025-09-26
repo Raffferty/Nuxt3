@@ -46,10 +46,18 @@ const route = useRoute()
 
 const slug = route.params.slug
 
+// definePageMeta() is a compile-time macro.
+// It runs before setup() executes, so you can’t access reactive values like useRoute() or route.params.slug inside it
+// definePageMeta({
+//  title: slug ? `Posts - ${slug}` : 'Posts', // this will not work
+// })
+
 // Use useHead() → when you need full control (custom tags, scripts, favicons, preload, etc.).
+const config = useRuntimeConfig()
+
 // Use useSeoMeta() → when you only need SEO-related tags (title, description, Open Graph, Twitter cards).
 useSeoMeta({
-  title: slug ? `Posts - ${slug}` : 'Posts',
+  title: slug ? `${config.public.appName} - Post ${slug}` : `${config.public.appName} - Posts`,
   description: `Details about posts ${slug}`,
   ogTitle: slug ? `Posts - ${slug}` : 'Posts',
 })

@@ -71,7 +71,7 @@ export default defineNuxtConfig({
   app: {
     // It's good practice to set tags in head that won't change such as your site title default, language and favicon.
     head: {
-      title: 'Nuxt3 Tutorial',
+      title: process.env.NUXT_PUBLIC_APP_NAME,
       htmlAttrs: {
         lang: 'en',
       },
@@ -172,6 +172,7 @@ export default defineNuxtConfig({
     // public.theme = env.NUXT_PUBLIC_THEME
     // public.apiBase = NUXT_PUBLIC_API_BASE
     public: {
+      appName: process.env.NUXT_PUBLIC_APP_NAME,
       // the value of baseUrl is taken from process.env.NUXT_PUBLIC_BASE_URL of the served (or built, or generated) .env file
       baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
       baseUrlNuxtApi: process.env.NUXT_BASE_URL_TO_NUXT_API,
@@ -183,6 +184,8 @@ export default defineNuxtConfig({
       //! when we generate the project as SSG for deployment - the default values will be overriden by appropriate values of env vars in generating time, for example: nuxt generate --dotenv .env.production
       theme: 'default-theme', // as we don't have in .env file the key NUXT_PUBLIC_THEME - the default value for theme will be used: 'default-theme'
       apiBase: 'default-api-base', // as we have in .env file the key NUXT_PUBLIC_API_BASE - it's value will override the default value 'default-api-base'
+
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL,
     },
   },
 })

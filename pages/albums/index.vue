@@ -37,6 +37,10 @@
 import { useAlbumsStore } from '@/stores/albums'
 import AppButtonText from '~/components/AppButtonText.vue'
 
+definePageMeta({
+  title: 'Albums',
+})
+
 const albumsStore = useAlbumsStore()
 
 albumsStore.ensureLoaded()

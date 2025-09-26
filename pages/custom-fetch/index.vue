@@ -16,6 +16,7 @@
 import type { customFetchType } from '@/composables/useCustomFetch'
 
 definePageMeta({
+  title: 'Custom fetch',
   layout: 'users',
 })
 
