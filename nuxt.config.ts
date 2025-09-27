@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', '@nuxt/image', '@nuxt/eslint', '@nuxt/icon'],
+  modules: ['@pinia/nuxt', '@nuxt/image', '@nuxt/eslint', '@nuxt/icon', '@nuxtjs/sitemap'],
   routeRules: {
     // Generated at build time for SEO purpose
     // Prerenders routes at build time and includes them in your build as static assets
@@ -187,5 +187,51 @@ export default defineNuxtConfig({
 
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL,
     },
+  },
+  // visit http://localhost:3000/sitemap.xml to see the generated sitemap.
+  /* 
+    XML Sitemap
+    (L) Nuxt3 Tutorial
+    This XML Sitemap contains 7 URLs.
+
+    URL	                                      Images	    Last Updated
+    http://127.0.0.1:63531/	                    1	         2025-09-27
+    http://127.0.0.1:63531/albums	              0	
+    http://127.0.0.1:63531/custom-fetch	        0	
+    http://127.0.0.1:63531/profile	            0	
+    http://127.0.0.1:61654/posts  	            0	         2025-09-27
+    http://127.0.0.1:63531/users	              0	
+    // http://127.0.0.1:63531/users/company	    0	                      excluded
+    http://127.0.0.1:63531/users/contacts	      0
+  */
+  site: {
+    url: process.env.NUXT_SITE_URL,
+    name: process.env.NUXT_SITE_NAME,
+    env: process.env.NUXT_SITE_ENV, // See this issue (https://github.com/nuxt/nuxt/issues/19819) on why we can't use process.env.NODE_ENV
+    indexable: process.env.NUXT_SITE_ENV === 'production' || process.env.NODE_ENV === 'production',
+    trailingSlash: false,
+    defaultLocale: 'en',
+  },
+  // Sitemap Images: https://nuxtseo.com/docs/sitemap/guides/images-videos#sitemap-images
+  sitemap: {
+    // exclude url /users/company
+    exclude: ['/users/company'],
+    urls: [
+      {
+        loc: '/',
+        lastmod: '2025-09-27',
+        images: [
+          {
+            loc: 'https://example.com/images/logo.jpg',
+            caption: 'My logo',
+            geoLocation: 'My logo geo location',
+            title: 'My logo title',
+            license: 'My logo license',
+          },
+        ],
+      },
+      { loc: '/posts', lastmod: '2025-09-27' }, // as pages/posts/[[slug]].vue is dynamic - it is not included to Sitemap, we includ it manually
+      // other urls are created from pages index files: pages/albums/index.vue; pages/custom-fetch/index.vue; ...
+    ],
   },
 })

@@ -2,6 +2,11 @@
   <div class="home-page">
     <AppSpinner v-if="is_loading" />
 
+    <h2>Site Config:</h2>
+    <pre style="font-size: 20px">{{ siteConfig }}</pre>
+
+    <div class="divider" />
+
     <NuxtLink to="/errr"
       ><AppButtonText style="background: #8800ff">to Error page</AppButtonText></NuxtLink
     >
@@ -117,6 +122,9 @@ import { AppButtonText, AppSpinner } from '#components'
 definePageMeta({
   title: 'Home',
 })
+
+const siteConfig = useSiteConfig()
+console.log('siteConfig', siteConfig)
 
 // For using in '<component :is="..." />'
 const MyButton = resolveComponent('AppButtonText')
