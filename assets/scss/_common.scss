@@ -76,3 +76,7 @@ p {
 .spinner-color-animation {
   @include spinner-color-animation();
 }
+
+pre {
+  white-space: break-spaces;
+}

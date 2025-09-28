@@ -67,6 +67,7 @@ setTimeout(() => {
   }
 
   .users-child {
+    max-width: 100%;
     margin: 24px 0;
     padding: 16px;
     width: 500px;

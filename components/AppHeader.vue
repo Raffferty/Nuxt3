@@ -31,6 +31,10 @@ header {
   .logo-link {
     display: flex;
     align-items: center;
+
+    @include respond(sm) {
+      display: none;
+    }
   }
 
   .links {

@@ -31,6 +31,7 @@
         <b
           style="
             display: inline-flex;
+            flex-shrink: 0;
             width: 40px;
             height: 40px;
             align-items: center;

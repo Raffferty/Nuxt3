@@ -19,6 +19,10 @@
   background: url('@/assets/images/bg-default.svg') no-repeat center;
   background-size: cover;
 
+  @include respond(sm) {
+    padding: 15px;
+  }
+
   h3 {
     margin: 0;
     margin-top: 24px;
