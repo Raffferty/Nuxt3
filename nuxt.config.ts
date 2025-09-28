@@ -5,7 +5,14 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', '@nuxt/image', '@nuxt/eslint', '@nuxt/icon', '@nuxtjs/sitemap'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxt/image',
+    '@nuxt/eslint',
+    '@nuxt/icon',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
+  ],
   routeRules: {
     // Generated at build time for SEO purpose
     // Prerenders routes at build time and includes them in your build as static assets
@@ -232,6 +239,20 @@ export default defineNuxtConfig({
       },
       { loc: '/posts', lastmod: '2025-09-27' }, // as pages/posts/[[slug]].vue is dynamic - it is not included to Sitemap, we includ it manually
       // other urls are created from pages index files: pages/albums/index.vue; pages/custom-fetch/index.vue; ...
+    ],
+  },
+  robots: {
+    // User-Agent: *
+    disallow: ['/users/contacts'],
+    // sitemap: ['/sitemap.xml'], // no need this as we have in the runtime config 'siteUrl'
+    groups: [
+      {
+        // User-Agent: AdsBot-Google-Mobile
+        // User-Agent: AdsBot-Google-Mobile-Apps
+        userAgent: ['AdsBot-Google-Mobile', 'AdsBot-Google-Mobile-Apps'],
+        disallow: ['/users'],
+        allow: ['/users/company'],
+      },
     ],
   },
 })

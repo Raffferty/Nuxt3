@@ -7,6 +7,11 @@
 
     <div class="divider" />
 
+    <h2>Robots rule:</h2>
+    <pre style="font-size: 20px">{{ robotsRule }}</pre>
+
+    <div class="divider" />
+
     <NuxtLink to="/errr"
       ><AppButtonText style="background: #8800ff">to Error page</AppButtonText></NuxtLink
     >
@@ -114,6 +119,7 @@
 </template>
 
 <script setup lang="ts">
+import { useRobotsRule } from '#imports'
 import { storeToRefs } from 'pinia'
 // AppButtonText is explicitly imported to use in '<component :is="AppButtonText" />'
 // We can explicitly import components from #components if you want or need to bypass Nuxt's auto-importing functionality.
@@ -125,6 +131,9 @@ definePageMeta({
 
 const siteConfig = useSiteConfig()
 console.log('siteConfig', siteConfig)
+
+const robotsRule = useRobotsRule()
+console.log('robotsRule', robotsRule)
 
 // For using in '<component :is="..." />'
 const MyButton = resolveComponent('AppButtonText')
@@ -270,7 +279,7 @@ const onHydrate = (hydrated_on: string) => {
 
   &__counter {
     width: fit-content;
-    min-width: 400px;
+    min-width: 300px;
     min-height: 60px;
     margin: 0 auto;
     margin-bottom: 2px;
@@ -282,7 +291,7 @@ const onHydrate = (hydrated_on: string) => {
 
   &__double-counter {
     width: fit-content;
-    min-width: 400px;
+    min-width: 300px;
     min-height: 60px;
     margin: 0 auto;
     padding: 8px;
