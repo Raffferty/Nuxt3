@@ -172,6 +172,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // runtimeConfig values can be accesd by useRuntimeConfig(), for example: useRuntimeConfig().public.baseUrl
 
+    mockApi: process.env.NUXT_MOCK_API, //! as mockApi is Not public - it can be accessed ONLY on SERVER side by useRuntimeConfig().mockApi
+    mockApiTodosPath: process.env.NUXT_MOCK_API_TODOS_PATH, //! as mockApiTodosPath is Not public - it can be accessed ONLY on SERVER side by useRuntimeConfig().mockApiTodosPath
+
     // keys in runtimeConfig => keys in .env :=> apiSecret = env.NUXT_API_SECRET
     apiSecret: process.env.NUXT_API_SECRET, //! as apiSecret is Not public - it can be accessed ONLY on SERVER side by useRuntimeConfig().apiSecret
 

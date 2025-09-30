@@ -27,7 +27,7 @@ export const useAlbumsStore = defineStore('albums', () => {
   const ttl = 20 * 1000 // time to live = 20 sec
 
   async function ensureLoaded() {
-    console.log('get_error.value', get_error.value)
+    console.log('ensureLoaded')
 
     if (get_error.value) {
       // this run useFetch as get_error.value is in the useFetch reactive params

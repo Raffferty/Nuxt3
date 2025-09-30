@@ -13,6 +13,7 @@
       <NuxtLink to="/posts/2">Post + [[slug]]</NuxtLink>
       <NuxtLink to="/albums">Albums + Pinia</NuxtLink>
       <NuxtLink to="/custom-fetch">Custom fetch</NuxtLink>
+      <NuxtLink to="/todos">Todos</NuxtLink>
       <NuxtLink to="/profile">Profile / {{ user ? 'Logout' : 'Login' }}</NuxtLink>
     </div>
   </header>
