@@ -16,7 +16,7 @@
     "preview-ssg": "nuxt preview",
     "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
-    "typecheck-watch": "vue-tsc --noEmit --skipLibCheck --watch",
+    "typecheck-watch": "vue-tsc --project .nuxt/tsconfig.json --noEmit --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
