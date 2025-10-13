@@ -472,6 +472,14 @@ const { $hello } = useNuxtApp()
 
 ## [updateAppConfig](https://nuxt.com/docs/3.x/api/utils/update-app-config): Update the App Config at runtime.
 
+# Testing
+
+## [docs](https://nuxt.com/docs/3.x/getting-started/testing)
+
+```sh
+npm i --save-dev @nuxt/test-utils vitest @vue/test-utils happy-dom playwright-core
+```
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
