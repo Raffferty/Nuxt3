@@ -480,6 +480,124 @@ const { $hello } = useNuxtApp()
 npm i --save-dev @nuxt/test-utils vitest @vue/test-utils happy-dom playwright-core
 ```
 
+## If you have Pinia:
+
+```sh
+npm i -D @pinia/testing
+```
+
+# Unit Testing
+
+## [docs](https://nuxt.com/docs/3.x/getting-started/testing#unit-testing)
+
+1. Add `@nuxt/test-utils/module` to your `nuxt.config` file (optional).
+   It adds a Vitest integration to your Nuxt DevTools which supports running your unit tests in development.
+
+```ts
+export default defineNuxtConfig({
+  modules: ['@nuxt/test-utils/module'],
+})
+```
+
+2. Create a `vitest.config.ts` with the following content:
+
+```ts
+import { defineConfig } from 'vitest/config'
+import { defineVitestProject } from '@nuxt/test-utils/config'
+
+export default defineConfig({
+  test: {
+    projects: [
+      {
+        test: {
+          globals: true,
+          name: 'unit',
+          include: ['tests/{e2e,unit}/*.{test,spec}.ts'],
+          environment: 'node',
+        },
+      },
+      await defineVitestProject({
+        test: {
+          globals: true,
+          name: 'nuxt',
+          include: ['tests/nuxt/{components,composables,store}/*.{test,spec}.ts'],
+          environment: 'nuxt',
+        },
+      }),
+    ],
+  },
+})
+```
+
+3. Add to `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  }
+}
+```
+
+### Using Vitest projects, you have fine-grained control over which tests run in which environment:
+
+**Unit tests**: Place regular unit tests in test/unit/ - these run in a Node environment for speed
+**Nuxt tests**: Place tests that rely on the Nuxt runtime environment in test/nuxt/ - these will run within a Nuxt runtime environment
+
+## Organizing Your Tests
+
+```ruby
+test/
+├── e2e/
+│ └── ssr.test.ts
+├── nuxt/
+│ ├── components/
+│ │  └── Component.test.ts
+│ └── composables/
+│   └── composable.test.ts
+├── unit/
+│ └── utils.test.ts
+```
+
+## Running Tests
+
+#### Run all tests
+
+```sh
+npx vitest run
+```
+
+#### Run only unit tests
+
+```sh
+npx vitest run --project unit
+```
+
+#### Run only Nuxt tests
+
+```sh
+npx vitest run --project nuxt
+```
+
+#### Run tests in watch mode
+
+```sh
+npx vitest --watch
+```
+
+## `package.json` test `scripts`
+
+```json
+"scripts": {
+  "test": "vitest run",
+  "test:watch": "vitest --watch",
+  "test:nuxt": "vitest run --project nuxt",
+  "test:nuxt:watch": "vitest --watch --project nuxt",
+  "test:unit": "vitest run --project unit",
+  "test:unit:watch": "vitest --watch --project unit"
+}
+```
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

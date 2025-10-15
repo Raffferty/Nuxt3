@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
+    '@nuxt/test-utils/module',
   ],
   routeRules: {
     // Generated at build time for SEO purpose
