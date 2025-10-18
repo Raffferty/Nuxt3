@@ -12,9 +12,9 @@ console.log('AppUsers Boolean(users.value)', Boolean(users.value))
  */
 // type User is auto-imported from shared/types/user.ts
 if (!users.value) {
-  const { data, pending, error } = await useFetch<User[]>('api/users', {
+  const { data, pending, error } = await useFetch<User[]>('/api/users', {
     key: 'users', // important: allows reuse via useNuxtData
-    lazy: true,
+    // lazy: true,
   })
 
   users.value = data.value || []

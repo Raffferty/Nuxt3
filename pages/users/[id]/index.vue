@@ -1,8 +1,19 @@
 <template>
   <div class="user">
     <NuxtLink to="/users">{{ '<<' }} Go to Users</NuxtLink>
+
     <p v-if="!user">No user found</p>
-    <pre v-else>{{ user }}</pre>
+
+    <template v-else>
+      <NuxtLink :to="`/users/${user.id}/edit`"> / Edit Users {{ '>>' }} </NuxtLink>
+
+      <pre> {{ user }}</pre>
+
+      <br />
+      <NuxtLink :to="`/users/${user.id}/details`">User {{ user.id }} Details (:) </NuxtLink>
+
+      <NuxtPage :user="user" />
+    </template>
   </div>
 </template>
 
@@ -45,15 +56,21 @@ console.log('route.params.id', route.params.id)
 const { data: users } = useNuxtData('users')
 console.log('id Boolean(users.value)', Boolean(users.value))
 
-if (!users.value) {
-  const { data } = await useFetch('/api/users', { key: 'users' })
+const user = ref<User | null>(null)
 
-  users.value = data.value || []
+if (!users.value) {
+  const { data } = await useFetch<User>(`/api/users/${route.params.id}`, {
+    key: `user-${route.params.id}`,
+    watch: false, // do not refetch when route changes
+  })
+
+  user.value = data.value || null
+} else {
+  // users are already fetched - get the user from the list
+  user.value = users.value.find((user: { id: string }) => user.id == route.params.id) || null
 }
 
-const user = users.value.find((user: { id: string }) => user.id == route.params.id)
-
-console.log('user', user)
+console.log('user', user.value)
 </script>
 
 <style lang="scss">

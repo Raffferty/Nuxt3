@@ -1,4 +1,5 @@
 export interface User {
+  id: number
   name: string
   address: { street: string }
   company: {

@@ -23,8 +23,8 @@ definePageMeta({
   middleware: 'users',
 })
 
-const { data: users } = useNuxtData('users')
-console.log('Boolean(users.value)', Boolean(users.value))
+// const { data: users } = useNuxtData('users')
+// console.log('Boolean(users.value)', Boolean(users.value))
 
 // as we have 'await useFetch' here - the navigation to this page will wait until fetching is ended
 // and in app.vue the NuxtLoadingIndicator will be shown
@@ -34,16 +34,17 @@ console.log('Boolean(users.value)', Boolean(users.value))
 // the navigation won't be blocked!
 
 // type User is auto-imported from shared/types/user.ts
-if (!users.value) {
+/* if (!users.value) {
   await useFetch<User[]>('/api/users', {
     key: 'users', // important: allows reuse via useNuxtData
-    // lazy: true,
+    lazy: true,
     // server: false,
   })
-}
+} */
 
 // type User is auto-imported from shared/types/user.ts
 const { data: user, execute } = useFetch<User>('/api/users/1', {
+  key: 'user-1',
   immediate: false,
   pick: ['name', 'address', 'company'], // to minimize the payload size
   transform: (user) => {
