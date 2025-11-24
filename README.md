@@ -85,7 +85,7 @@ export default defineNuxtConfig({
     dirs: [],
   },
 
-  // But it is OK if we explicitly import even if auto-importing is diabled
+  // But it is OK if we explicitly import even if auto-importing is disabled
 })
 ```
 
@@ -199,7 +199,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
   eslint: {
     // options here
-    checker: true, // for ESLint checking when runing dev server, using `vite-plugin-eslint2` (NOT on the build time!)
+    checker: true, // for ESLint checking when running dev server, using `vite-plugin-eslint2` (NOT on the build time!)
   },
 })
 ```
@@ -231,7 +231,7 @@ export default defineNuxtConfig({
 ```ts
 export default defineNuxtConfig({
   runtimeConfig: {
-    // runtimeConfig values can be accesd by useRuntimeConfig(), for example: useRuntimeConfig().public.baseUrl
+    // runtimeConfig values can be accessed by useRuntimeConfig(), for example: useRuntimeConfig().public.baseUrl
 
     // keys in runtimeConfig => keys in .env :=> apiSecret = env.NUXT_API_SECRET
     apiSecret: process.env.NUXT_API_SECRET, // ! as apiSecret is Not public - it can be accessed ONLY on SERVER side by useRuntimeConfig().apiSecret
@@ -243,11 +243,11 @@ export default defineNuxtConfig({
       // the value of baseUrl is taken from process.env.NUXT_PUBLIC_BASE_URL of the served (or built, or generated) .env file
       baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
 
-      //! the default values will be overriden by appropriate values from .env file served by LOCAL server:
+      //! the default values will be overridden by appropriate values from .env file served by LOCAL server:
       // for example: nuxt dev --dotenv .env.development.local
 
-      //! when we build the project as SSR for deployment - the default values will be overriden by appropriate values of env vars of the set on the hosting platform (Vercel, Netlify, Docker, etc.)
-      //! when we generate the project as SSG for deployment - the default values will be overriden by appropriate values of env vars in generating time, for example: nuxt generate --dotenv .env.production
+      //! when we build the project as SSR for deployment - the default values will be overridden by appropriate values of env vars of the set on the hosting platform (Vercel, Netlify, Docker, etc.)
+      //! when we generate the project as SSG for deployment - the default values will be overridden by appropriate values of env vars in generating time, for example: nuxt generate --dotenv .env.production
       theme: 'default-theme', // as we don't have in .env file the key NUXT_PUBLIC_THEME - the default value for theme will be used: 'default-theme'
       apiBase: 'default-api-base', // as we have in .env file the key NUXT_PUBLIC_API_BASE - it's value will override the default value 'default-api-base'
     },
@@ -297,105 +297,184 @@ export default defineNuxtConfig({
 
 # Nuxt Composables
 
-## [onPrehydrate](https://nuxt.com/docs/3.x/api/composables/on-prehydrate): to run a callback on the client immediately before Nuxt hydrates the page.
+## [onPrehydrate](https://nuxt.com/docs/3.x/api/composables/on-prehydrate)
 
-## [useAppConfig](https://nuxt.com/docs/3.x/api/composables/use-app-config): access the reactive app config defined in the project.
+- to run a callback on the client immediately before Nuxt hydrates the page.
 
-## [<bold-red>useAsyncData</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-async-data): provides access to data that resolves asynchronously in an SSR-friendly composable. Blocks the navigation if used with `await` and blocks initial page loading (no matter the `await`).
+## [useAppConfig](https://nuxt.com/docs/3.x/api/composables/use-app-config)
 
-### **_useAsyncData_** is a composable meant to be called directly in the Nuxt context. It returns reactive composables and handles adding responses to the Nuxt payload so they can be passed from server to client **_without re-fetching_** the data on client side when the page hydrates.
+- access the reactive app config defined in the project.
 
-### **By default, useAsyncData blocks navigation** until its async handler is resolved.
+## [<bold-red>useAsyncData</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-async-data)
 
-## [useCookie](https://nuxt.com/docs/3.x/api/composables/use-cookie): is an SSR-friendly composable to read and write cookies.
+- Provides access to data that resolves asynchronously in an SSR-friendly composable.
+- Blocks the navigation if used with `await` and blocks initial page loading (no matter the `await`).
+- **_useAsyncData_** is a composable meant to be called directly in the Nuxt context.
+- It returns reactive composables and handles adding responses to the Nuxt payload so they can be passed from server to client **_without re-fetching_** the data on client side when the page hydrates.
+- **By default, useAsyncData blocks navigation** until its async handler is resolved.
 
-## [useError](https://nuxt.com/docs/3.x/api/composables/use-error): returns the global Nuxt error that is being handled.
+## [useCookie](https://nuxt.com/docs/3.x/api/composables/use-cookie)
 
-## [<bold-red>useFetch</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-fetch): fetch data from an API endpoint with an SSR-friendly composable. Blocks the navigation if used with `await` and blocks initial page loading (no matter the `await`).
+- is an SSR-friendly composable to read and write cookies.
 
-### **_useFetch_** is a composable meant to be called directly in a setup function, plugin, or route middleware. It returns reactive composables and handles adding responses to the Nuxt payload so they can be passed from server to client **_without re-fetching_** the data on client side when the page hydrates.
+## [useError](https://nuxt.com/docs/3.x/api/composables/use-error)
 
-### **By default, useFetch blocks navigation** until its async handler is resolved.
+- returns the global Nuxt error that is being handled.
 
-## [useHead](https://nuxt.com/docs/3.x/api/composables/use-head): customizes the head properties of individual pages of your Nuxt app.
+## [<bold-red>useFetch</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-fetch)
 
-## [useHeadSafe](https://nuxt.com/docs/3.x/api/composables/use-head-safe): the recommended way to provide head data with user input.
+-fetch data from an API endpoint with an SSR-friendly composable.
 
-## [useHydration](https://nuxt.com/docs/3.x/api/composables/use-hydration): allows full control of the hydration cycle to set and receive data from the server.
+- Blocks the navigation if used with `await` and blocks initial page loading (no matter the `await`).
+- **_useFetch_** is a composable meant to be called directly in a setup function, plugin, or route middleware.
+- It returns reactive composables and handles adding responses to the Nuxt payload so they can be passed from server to client **_without re-fetching_** the data on client side when the page hydrates.
+- **By default, useFetch blocks navigation** until its async handler is resolved.
 
-## [<bold-red>useLazyAsyncData</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-lazy-async-data): this wrapper around useAsyncData, doesnt respect `await`, triggers navigation immediately. Exept on INITIAL `(SSR)` loading! To not block initial page loading with useLazyFetch should be set `{ server: false }`
+## [useHead](https://nuxt.com/docs/3.x/api/composables/use-head)
 
-### **_useLazyAsyncData_** provides a wrapper around `useAsyncData` that **triggers navigation before the handler is resolved.**
+- customizes the head properties of individual pages of your Nuxt app.
 
-## [<bold-red>useLazyFetch</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-lazy-fetch): this wrapper around useFetch, doesnt respect `await`, triggers navigation immediately. Exept on INITIAL `(SSR)` loading! To not block initial page loading with useLazyFetch should be set `{ server: false }`
+## [useHeadSafe](https://nuxt.com/docs/3.x/api/composables/use-head-safe)
 
-### **_useLazyFetch_** provides a wrapper around `useFetch` that **triggers navigation before the handler is resolved.**
+- the recommended way to provide head data with user input.
 
-## [useLoadingIndicator](https://nuxt.com/docs/3.x/api/composables/use-loading-indicator): this composable gives you access to the loading state of the app page.
+## [useHydration](https://nuxt.com/docs/3.x/api/composables/use-hydration)
 
-## [useNuxtApp](https://nuxt.com/docs/3.x/api/composables/use-nuxt-app): access the shared runtime context of the Nuxt Application.
+- allows full control of the hydration cycle to set and receive data from the server.
 
-## [<bold-red>useNuxtData</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-nuxt-data): access the current cached value of data fetching composables.
+## [<bold-red>useLazyAsyncData</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-lazy-async-data)
 
-### **_useNuxtData_** gives you access to the current cached value of `useAsyncData`, `useLazyAsyncData`, `useFetch` and `useLazyFetch` with explicitly provided key. To use `useNuxtData`, ensure that the data-fetching composable (`useFetch`, `useAsyncData`, etc.) has been called with an explicitly provided key.
+- this wrapper around useAsyncData, doesn't respect `await`, triggers navigation immediately.
+- Except on INITIAL `(SSR)` loading! To not block initial page loading with useLazyFetch should be set `{ server: false }`
+- **_useLazyAsyncData_** provides a wrapper around `useAsyncData` that **triggers navigation before the handler is resolved.**
 
-## [usePreviewMode](https://nuxt.com/docs/3.x/api/composables/use-preview-mode): to check and control preview mode in Nuxt.
+## [<bold-red>useLazyFetch</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-lazy-fetch)
 
-## [useRequestEvent](https://nuxt.com/docs/3.x/api/composables/use-request-event): access the incoming request event with the useRequestEvent composable.
+- this wrapper around useFetch, doesn't respect `await`, triggers navigation immediately.
+- Except on INITIAL `(SSR)` loading! To not block initial page loading with useLazyFetch should be set `{ server: false }`
+- **_useLazyFetch_** provides a wrapper around `useFetch` that **triggers navigation before the handler is resolved.**
 
-## [useRequestFetch](https://nuxt.com/docs/3.x/api/composables/use-request-fetch): forward the request context and headers for server-side fetch requests.
+## [useLoadingIndicator](https://nuxt.com/docs/3.x/api/composables/use-loading-indicator)
 
-## [useRequestHeader](https://nuxt.com/docs/3.x/api/composables/use-request-header): to access a certain incoming request header.
+- this composable gives you access to the loading state of the app page.
 
-## [useRequestHeaders](https://nuxt.com/docs/3.x/api/composables/use-request-headers): to access the incoming request headers.
+## [useNuxtApp](https://nuxt.com/docs/3.x/api/composables/use-nuxt-app)
 
-## [useRequestURL](https://nuxt.com/docs/3.x/api/composables/use-request-url): access the incoming request URL.
+- access the shared runtime context of the Nuxt Application.
 
-## [useResponseHeader](https://nuxt.com/docs/3.x/api/composables/use-response-header): to set a server response header.
+## [<bold-red>useNuxtData</bold-red>](https://nuxt.com/docs/3.x/api/composables/use-nuxt-data)
 
-## [useRoute](https://nuxt.com/docs/3.x/api/composables/use-route): returns the current route.
+- access the current cached value of data fetching composables.
+- **_useNuxtData_** gives you access to the current cached value of `useAsyncData`, `useLazyAsyncData`, `useFetch` and `useLazyFetch` with explicitly provided key.
+- To use `useNuxtData`, ensure that the data-fetching composable (`useFetch`, `useAsyncData`, etc.) has been called with an explicitly provided key.
 
-## [useRouteAnnouncer](https://nuxt.com/docs/3.x/api/composables/use-route-announcer): observes the page title changes and updates the announcer message accordingly.
+## [usePreviewMode](https://nuxt.com/docs/3.x/api/composables/use-preview-mode)
 
-## [useRouter](https://nuxt.com/docs/3.x/api/composables/use-router): returns the router instance.
+- to check and control preview mode in Nuxt.
 
-## [useRuntimeConfig](https://nuxt.com/docs/3.x/api/composables/use-runtime-config): access runtime config variables.
+## [useRequestEvent](https://nuxt.com/docs/3.x/api/composables/use-request-event)
 
-## [useRuntimeHook](https://nuxt.com/docs/3.x/api/composables/use-runtime-hook): registers a runtime hook in a Nuxt application and ensures it is properly disposed of when the scope is destroyed.
+- access the incoming request event with the useRequestEvent composable.
 
-## [useSeoMeta](https://nuxt.com/docs/3.x/api/composables/use-seo-meta): lets you define your site's SEO meta tags as a flat object with full TypeScript support.
+## [useRequestFetch](https://nuxt.com/docs/3.x/api/composables/use-request-fetch)
 
-## [useServerSeoMeta](https://nuxt.com/docs/3.x/api/composables/use-server-seo-meta): lets you define your site's SEO meta tags as a flat object with full TypeScript support.
+- forward the request context and headers for server-side fetch requests.
 
-## [useState](https://nuxt.com/docs/3.x/api/composables/use-state): creates a reactive and SSR-friendly shared state.
+## [useRequestHeader](https://nuxt.com/docs/3.x/api/composables/use-request-header)
+
+- to access a certain incoming request header.
+
+## [useRequestHeaders](https://nuxt.com/docs/3.x/api/composables/use-request-headers)
+
+- to access the incoming request headers.
+
+## [useRequestURL](https://nuxt.com/docs/3.x/api/composables/use-request-url)
+
+- access the incoming request URL.
+
+## [useResponseHeader](https://nuxt.com/docs/3.x/api/composables/use-response-header)
+
+- to set a server response header.
+
+## [useRoute](https://nuxt.com/docs/3.x/api/composables/use-route)
+
+- returns the current route.
+
+## [useRouteAnnouncer](https://nuxt.com/docs/3.x/api/composables/use-route-announcer)
+
+- observes the page title changes and updates the announcer message accordingly.
+
+## [useRouter](https://nuxt.com/docs/3.x/api/composables/use-router)
+
+- returns the router instance.
+
+## [useRuntimeConfig](https://nuxt.com/docs/3.x/api/composables/use-runtime-config)
+
+- access runtime config variables.
+
+## [useRuntimeHook](https://nuxt.com/docs/3.x/api/composables/use-runtime-hook)
+
+- registers a runtime hook in a Nuxt application and ensures it is properly disposed of when the scope is destroyed.
+
+## [useSeoMeta](https://nuxt.com/docs/3.x/api/composables/use-seo-meta)
+
+- lets you define your site's SEO meta tags as a flat object with full TypeScript support.
+
+## [useServerSeoMeta](https://nuxt.com/docs/3.x/api/composables/use-server-seo-meta)
+
+- lets you define your site's SEO meta tags as a flat object with full TypeScript support.
+
+## [useState](https://nuxt.com/docs/3.x/api/composables/use-state)
+
+- creates a reactive and SSR-friendly shared state.
 
 # Nuxt Utils
 
-## [<bold-red>\$fetch</bold-red>](https://nuxt.com/docs/3.x/api/utils/dollarfetch): to expose globally the $fetch helper for making HTTP requests.
+## [<bold-red>\$fetch</bold-red>](https://nuxt.com/docs/3.x/api/utils/dollarfetch)
 
-### Using \$fetch in components without wrapping it with useAsyncData causes fetching the data twice: initially on the server, then again on the client-side during hydration, because $fetch does not transfer state from the server to the client. Thus, the fetch will be executed on both sides because the client has to get the data again.
+- to expose globally the $fetch helper for making HTTP requests.
+- Using \$fetch in components without wrapping it with useAsyncData causes fetching the data twice: initially on the server, then again on the client-side during hydration, because $fetch does not transfer state from the server to the client. Thus, the fetch will be executed on both sides because the client has to get the data again.
 
-## [abortNavigation](https://nuxt.com/docs/3.x/api/utils/abort-navigation): is a helper function that prevents navigation from taking place and throws an error if one is set as a parameter.
+## [abortNavigation](https://nuxt.com/docs/3.x/api/utils/abort-navigation)
 
-## [addRouteMiddleware](https://nuxt.com/docs/3.x/api/utils/add-route-middleware): is a helper function to dynamically add middleware in your application.
+- is a helper function that prevents navigation from taking place and throws an error if one is set as a parameter.
 
-## [callOnce](https://nuxt.com/docs/3.x/api/utils/call-once): Run a given function or block of code once during SSR or CSR.
+## [addRouteMiddleware](https://nuxt.com/docs/3.x/api/utils/add-route-middleware)
 
-## [clearError](https://nuxt.com/docs/3.x/api/utils/clear-error): The clearError composable clears all handled errors.
+- is a helper function to dynamically add middleware in your application.
 
-## [clearNuxtData](https://nuxt.com/docs/3.x/api/utils/clear-nuxt-data): Delete cached data, error status and pending promises of useAsyncData and useFetch.
+## [callOnce](https://nuxt.com/docs/3.x/api/utils/call-once)
 
-## [clearNuxtState](https://nuxt.com/docs/3.x/api/utils/clear-nuxt-state): Delete the cached state of useState.
+- Run a given function or block of code once during SSR or CSR.
 
-## [createError](https://nuxt.com/docs/3.x/api/utils/create-error): Create an error object with additional metadata.
+## [clearError](https://nuxt.com/docs/3.x/api/utils/clear-error)
 
-## [defineLazyHydrationComponent](https://nuxt.com/docs/3.x/api/utils/define-lazy-hydration-component): Define a lazy hydration component with a specific strategy.
+- The clearError composable clears all handled errors.
 
-## [defineNuxtComponent](https://nuxt.com/docs/3.x/api/utils/define-nuxt-component): defineNuxtComponent() is a helper function for defining type safe components with Options API.
+## [clearNuxtData](https://nuxt.com/docs/3.x/api/utils/clear-nuxt-data)
 
-## [<bold-red>defineNuxtPlugin</bold-red>](https://nuxt.com/docs/3.x/api/utils/define-nuxt-plugin): defineNuxtPlugin() is a helper function for creating Nuxt plugins.
+- Delete cached data, error status and pending promises of useAsyncData and useFetch.
 
-#### Nuxt automatically reads the files in the plugins/ directory and loads them at the creation of the Vue application.
+## [clearNuxtState](https://nuxt.com/docs/3.x/api/utils/clear-nuxt-state)
+
+- Delete the cached state of useState.
+
+## [createError](https://nuxt.com/docs/3.x/api/utils/create-error)
+
+- Create an error object with additional metadata.
+
+## [defineLazyHydrationComponent](https://nuxt.com/docs/3.x/api/utils/define-lazy-hydration-component)
+
+- Define a lazy hydration component with a specific strategy.
+
+## [defineNuxtComponent](https://nuxt.com/docs/3.x/api/utils/define-nuxt-component)
+
+- defineNuxtComponent() is a helper function for defining type safe components with Options API.
+
+## [<bold-red>defineNuxtPlugin</bold-red>](https://nuxt.com/docs/3.x/api/utils/define-nuxt-plugin)
+
+- defineNuxtPlugin() is a helper function for creating Nuxt plugins.
+- Nuxt automatically reads the files in the plugins/ directory and loads them at the creation of the Vue application.
 
 ### Object Syntax Plugins
 
@@ -438,39 +517,73 @@ export default defineNuxtPlugin(() => {
 const { $hello } = useNuxtApp()
 ```
 
-## [defineNuxtRouteMiddleware](https://nuxt.com/docs/3.x/api/utils/define-nuxt-route-middleware): Create named route middleware using defineNuxtRouteMiddleware helper function.
+## [defineNuxtRouteMiddleware](https://nuxt.com/docs/3.x/api/utils/define-nuxt-route-middleware)
 
-## [definePageMeta](https://nuxt.com/docs/3.x/api/utils/define-page-meta): Define metadata for your page components.
+- Create named route middleware using defineNuxtRouteMiddleware helper function.
 
-## [defineRouteRules](https://nuxt.com/docs/3.x/api/utils/define-route-rules): Define route rules for hybrid rendering at the page level.
+## [definePageMeta](https://nuxt.com/docs/3.x/api/utils/define-page-meta)
 
-## [navigateTo](https://nuxt.com/docs/3.x/api/utils/navigate-to): is a helper function that programmatically navigates users.
+- Define metadata for your page components.
 
-## [onBeforeRouteLeave](https://nuxt.com/docs/3.x/api/utils/on-before-route-leave): The onBeforeRouteLeave composable allows registering a route guard within a component.
+## [defineRouteRules](https://nuxt.com/docs/3.x/api/utils/define-route-rules)
 
-## [onNuxtReady](https://nuxt.com/docs/3.x/api/utils/on-nuxt-ready): The onNuxtReady composable allows running a callback after your app has finished initializing.
+- Define route rules for hybrid rendering at the page level.
 
-## [prefetchComponents](https://nuxt.com/docs/3.x/api/utils/prefetch-components): Nuxt provides utilities to give you control over prefetching components.
+## [navigateTo](https://nuxt.com/docs/3.x/api/utils/navigate-to)
 
-## [preloadComponents](https://nuxt.com/docs/3.x/api/utils/preload-components): Nuxt provides utilities to give you control over preloading components.
+- is a helper function that programmatically navigates users.
 
-## [preloadRouteComponents](https://nuxt.com/docs/3.x/api/utils/preload-route-components): preloadRouteComponents allows you to manually preload individual pages in your Nuxt app.
+## [onBeforeRouteLeave](https://nuxt.com/docs/3.x/api/utils/on-before-route-leave)
 
-## [prerenderRoutes](https://nuxt.com/docs/3.x/api/utils/prerender-routes): prerenderRoutes hints to Nitro to prerender an additional route.
+- The onBeforeRouteLeave composable allows registering a route guard within a component.
 
-## [refreshCookie](https://nuxt.com/docs/3.x/api/utils/refresh-cookie): Refresh useCookie values manually when a cookie has changed.
+## [onNuxtReady](https://nuxt.com/docs/3.x/api/utils/on-nuxt-ready)
 
-## [refreshNuxtData](https://nuxt.com/docs/3.x/api/utils/refresh-nuxt-data): Refresh all or specific asyncData instances in Nuxt.
+- The onNuxtReady composable allows running a callback after your app has finished initializing.
 
-## [reloadNuxtApp](https://nuxt.com/docs/3.x/api/utils/reload-nuxt-app): reloadNuxtApp will perform a hard reload of the page.
+## [prefetchComponents](https://nuxt.com/docs/3.x/api/utils/prefetch-components)
 
-## [setPageLayout](https://nuxt.com/docs/3.x/api/utils/set-page-layout): setPageLayout allows you to dynamically change the layout of a page.
+- Nuxt provides utilities to give you control over prefetching components.
 
-## [setResponseStatus](https://nuxt.com/docs/3.x/api/utils/set-response-status): sets the statusCode (and optionally the statusMessage) of the response.
+## [preloadComponents](https://nuxt.com/docs/3.x/api/utils/preload-components)
 
-## [showError](https://nuxt.com/docs/3.x/api/utils/show-error): Nuxt provides a quick and simple way to show a full screen error page if needed.
+- Nuxt provides utilities to give you control over preloading components.
 
-## [updateAppConfig](https://nuxt.com/docs/3.x/api/utils/update-app-config): Update the App Config at runtime.
+## [preloadRouteComponents](https://nuxt.com/docs/3.x/api/utils/preload-route-components)
+
+- preloadRouteComponents allows you to manually preload individual pages in your Nuxt app.
+
+## [prerenderRoutes](https://nuxt.com/docs/3.x/api/utils/prerender-routes)
+
+- prerenderRoutes hints to Nitro to prerender an additional route.
+
+## [refreshCookie](https://nuxt.com/docs/3.x/api/utils/refresh-cookie)
+
+- Refresh useCookie values manually when a cookie has changed.
+
+## [refreshNuxtData](https://nuxt.com/docs/3.x/api/utils/refresh-nuxt-data)
+
+- Refresh all or specific asyncData instances in Nuxt.
+
+## [reloadNuxtApp](https://nuxt.com/docs/3.x/api/utils/reload-nuxt-app)
+
+- reloadNuxtApp will perform a hard reload of the page.
+
+## [setPageLayout](https://nuxt.com/docs/3.x/api/utils/set-page-layout)
+
+- setPageLayout allows you to dynamically change the layout of a page.
+
+## [setResponseStatus](https://nuxt.com/docs/3.x/api/utils/set-response-status)
+
+- sets the statusCode (and optionally the statusMessage) of the response.
+
+## [showError](https://nuxt.com/docs/3.x/api/utils/show-error)
+
+- Nuxt provides a quick and simple way to show a full screen error page if needed.
+
+## [updateAppConfig](https://nuxt.com/docs/3.x/api/utils/update-app-config)
+
+- Update the App Config at runtime.
 
 # Testing
 
@@ -510,17 +623,20 @@ export default defineConfig({
     projects: [
       {
         test: {
-          globals: true,
+          globals: true, // to not import 'vitest/globals' in every test file
           name: 'unit',
-          include: ['tests/{e2e,unit}/*.{test,spec}.ts'],
+          include: ['tests/unit/**/*.{test,spec}.ts'],
           environment: 'node',
         },
       },
       await defineVitestProject({
         test: {
-          globals: true,
+          globals: true, // to not import 'vitest/globals' in every test file
           name: 'nuxt',
-          include: ['tests/nuxt/{components,composables,store}/*.{test,spec}.ts'],
+          include: [
+            'tests/nuxt/{components,composables,store}/**/*.{test,spec}.ts',
+            'tests/nuxt/server/**/*.{test,spec}.ts',
+          ],
           environment: 'nuxt',
         },
       }),
@@ -546,20 +662,32 @@ export default defineConfig({
 
 ## Organizing Your Tests
 
+**from vitest.config.ts**
+
+- nuxt/ => environment: 'nuxt'
+- unit/ => environment: 'node'
+
+- **e2e/ => will run with Playwright Test Runner after @playwright/test installation**
+
 ```ruby
 test/
 ├── e2e/
-│ └── ssr.test.ts
+│ └── homepage.test.ts
 ├── nuxt/
 │ ├── components/
 │ │  └── Component.test.ts
 │ └── composables/
-│   └── composable.test.ts
+│ │ └── composables/
+│ └── server/
+│ | └── api/
+│ |    └── index.get.test.ts
+│ └── store/
+│   └── todo.test.ts
 ├── unit/
 │ └── utils.test.ts
 ```
 
-## Running Tests
+## Running Tests **with Vitest**
 
 #### Run all tests
 
@@ -589,12 +717,63 @@ npx vitest --watch
 
 ```json
 "scripts": {
-  "test": "vitest run",
-  "test:watch": "vitest --watch",
-  "test:nuxt": "vitest run --project nuxt",
-  "test:nuxt:watch": "vitest --watch --project nuxt",
-  "test:unit": "vitest run --project unit",
-  "test:unit:watch": "vitest --watch --project unit"
+  "test": "vitest run", // runs the tests without watching
+  "test:watch": "vitest --watch", // runs the tests with watching
+  "test:preview": "vite preview --outDir vitest-ui", // preview the tests from vitest-ui folder (no watching) in Vitest UI
+  "test:ui": "vitest --watch --ui", // runs tests in watch mode and prview the results in Vitest UI
+  "test:nuxt": "vitest run --project nuxt", // runs without watching under the tests/nuxt folder (vitest.config.ts project.test.name = 'nuxt')
+  "test:nuxt:watch": "vitest --watch --project nuxt", // runs with watching under the tests/nuxt folder (vitest.config.ts project.test.name = 'nuxt')
+  "test:unit": "vitest run --project unit", // runs without watching under the tests/{e2e,unit} folder (vitest.config.ts project.test.name = 'unit')
+  "test:unit:watch": "vitest --watch --project unit", // runs with watching under the tests/{e2e,unit} folder (vitest.config.ts project.test.name = 'unit')
+  "coverage": "vitest run --coverage" // runs the coverage without Vitest UI (shows the result in the Terminal)
+}
+```
+
+## You can use npm run test command with testFile name (if it is uniq):
+
+```sh
+npm run test AppButtonText.test.ts
+```
+
+## Or with the path to the file:
+
+```sh
+npm run test tests/nuxt/components/AppButtonText.test.ts
+```
+
+# e2e Testing with Playwright Test Runner
+
+[docs](https://nuxt.com/docs/3.x/getting-started/testing#testing-with-playwright-test-runner)
+
+installation:
+
+```bash
+npm i --save-dev @playwright/test @nuxt/test-utils
+```
+
+then (to install browsers):
+
+```bash
+npx playwright install
+```
+
+[create playwright.config.ts](https://github.com/nuxt/test-utils/blob/main/examples/app-playwright/playwright.config.ts)
+where we have: `testDir: 'tests/e2e'`
+
+**Playwright runs outside of Nuxt, so .env files aren’t automatically loaded**
+**Add `dotenv-cli` package** to run "e2e" script with the appropriate .env vars:
+
+```bash
+npm i -D dotenv-cli
+```
+
+Add `"e2e"` scripts to package.json
+
+```json
+"scripts": {
+  "e2e": "npx dotenv -e .env.development.local -- npx playwright test",
+  "e2e:prod": "npx dotenv -e .env.production -- npx playwright test",
+  "e2e:report": "playwright show-report"
 }
 ```
 

@@ -3,3 +3,17 @@ node_modules
 dist
 .output
 .nuxt
+coverage
+build
+.vscode
+*.min.js
+*.bundle.js
+*.lock
+.DS_Store
+.idea
+*.log
+.env
+.env.local
+.env.*.local
+package.json
+package-lock.json

@@ -2,7 +2,7 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
 
   const cookies = parseCookies(event) // Record<string, string> -> { 'my-cookie': '111', logins: '5', user: '{"name":"ttt"}' }
-  console.log('cookies:', cookies) // -> { user: 123 }
+  console.log('cookies:', cookies) // -> { 'my-cookie': '111', logins: '5', user: '{"name":"ttt"}' }
 
   // Access the injected auth object
   const auth = event.context.auth
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   // accept	*/*
   // x-user-id	123
   // authorization	Bearer api-secret-local
-  // cookie	my-cookie=111; logins=5; user=%7B%22name%22%3A%22ttt%22%7D
+  //? cookie	my-cookie=111; logins=5; user=%7B%22name%22%3A%22ttt%22%7D
   // accept-language	en,ru;q=0.9,uk;q=0.8,en-US;q=0.7,de;q=0.6,ru-RU;q=0.5
   // referer	http://localhost:3000/
   // sec-fetch-dest	empty

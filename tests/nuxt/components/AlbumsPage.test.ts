@@ -1,6 +1,6 @@
 // we have globals enabled in vitest.config.ts
 // import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { mountSuspended, mockComponent } from '@nuxt/test-utils/runtime'
 import type { createPinia } from 'pinia' // Import createPinia from the main 'pinia' package
 import { createTestingPinia } from '@pinia/testing'
 import { useAlbumsStore } from '@/stores/albums'
@@ -8,12 +8,18 @@ import AlbumsPage from '@/pages/albums/index.vue'
 import AppButtonText from '@/components/AppButtonText.vue'
 
 // Mock the AppButtonText component used in AlbumsPage
-vi.mock('@/components/AppButtonText.vue', () => ({
+mockComponent('@/components/AppButtonText.vue', {
+  template: '<button class="mock-button-text" :disabled="disabled"><slot /></button>',
+  props: ['disabled'],
+})
+
+// OR
+/* vi.mock('@/components/AppButtonText.vue', () => ({
   default: {
     template: '<button class="app-button-text" :disabled="disabled"><slot /></button>',
     props: ['disabled'],
   },
-}))
+})) */
 
 describe('AlbumsPage.vue', () => {
   // 1. Define a type for the error based on your store's usage (Nuxt/ofetch error structure)
@@ -43,7 +49,10 @@ describe('AlbumsPage.vue', () => {
   beforeEach(() => {
     // 1. Create a Pinia instance using createTestingPinia
     pinia = createTestingPinia({
-      createSpy: vi.fn,
+      // When using Jest, or vitest with globals: true,
+      // createTestingPinia automatically stubs actions using the spy function based on the existing test framework (jest.fn or vitest.fn).
+      // If you are not using globals: true or using a different framework, you'll need to provide a createSpy option:
+      // createSpy: vi.fn,
       initialState: {},
       // Ensure Pinia Testing doesn't automatically stub every action
       stubActions: false,

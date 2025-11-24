@@ -91,6 +91,8 @@ const props = withDefaults(defineProps<InputProps>(), {
   debounce: 0,
 
   type: 'text',
+  disabled: false,
+  readonly: false,
 })
 
 const $emit = defineEmits([

@@ -31,7 +31,7 @@
       <li v-for="todo in todoStore.todos" :key="todo.id">
         <div v-if="editId === todo.id" class="todos__todo--block">
           <AppInput
-            :ref="(el) => (editInputRefs[todo.id] = el as InstanceType<typeof AppInput>)"
+            :ref="setEditInputRef(todo.id)"
             v-model="editTitle"
             :disabled="todoStore.loading"
             class="todos__todo--edit-input"
@@ -43,7 +43,7 @@
             @click="saveEdit(todo)"
             >💾 Save</AppButtonText
           >
-          <AppButtonText class="todos__button" :disabled="todoStore.loading" @click="cacelEdit"
+          <AppButtonText class="todos__button" :disabled="todoStore.loading" @click="cancelEdit"
             >❌ Cancel</AppButtonText
           >
         </div>
@@ -72,6 +72,11 @@
 import { useTodoStore } from '@/stores/todo'
 import AppButtonText from '~/components/AppButtonText.vue'
 import AppInput from '~/components/AppInput.vue'
+import type { ComponentPublicInstance } from 'vue'
+
+definePageMeta({
+  title: 'Todos',
+})
 
 const todoStore = useTodoStore()
 
@@ -98,13 +103,15 @@ const add = async () => {
 
 const editInputRefs = ref<Record<number, InstanceType<typeof AppInput> | null>>({})
 
+const setEditInputRef = (id: number) => (el: Element | ComponentPublicInstance | null) => {
+  editInputRefs.value[id] = el as InstanceType<typeof AppInput> | null
+}
+
 const startEdit = async (todo: { id: number; title: string }) => {
   editId.value = todo.id
   editTitle.value = todo.title
 
   await nextTick()
-
-  console.log('editInputRefs.value', editInputRefs.value)
 
   editInputRefs.value[todo.id]?.focus()
 }
@@ -117,7 +124,7 @@ const saveEdit = async (todo: { id: number; title: string }) => {
   addInput.value?.focus()
 }
 
-const cacelEdit = () => {
+const cancelEdit = () => {
   editTitle.value = ''
   editId.value = null
   addInput.value?.focus()

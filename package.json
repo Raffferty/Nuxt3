@@ -5,28 +5,52 @@
   "scripts": {
     "build": "eslint . && nuxt build --dotenv .env.production",
     "build-dev": "eslint . && nuxt build --dotenv .env.development.local",
+
     "dev": "nuxt dev --dotenv .env.development.local",
     "dev-host": "nuxt dev --host --dotenv .env.development.local",
     "dev-prod": "nuxt dev --dotenv .env.production",
     "dev-prod-host": "nuxt dev --host --dotenv .env.production",
+
     "generate": "nuxt generate --dotenv .env.production",
     "generate-dev": "nuxt generate --dotenv .env.development.local",
+
     "preview": "nuxt preview --dotenv .env.production",
     "preview-dev": "nuxt preview --dotenv .env.development.local",
     "preview-ssg": "nuxt preview",
     "postinstall": "nuxt prepare",
+
     "typecheck": "nuxt typecheck",
     "typecheck-watch": "vue-tsc --project .nuxt/tsconfig.json --noEmit --watch",
+
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+
     "test": "vitest run",
     "test:watch": "vitest --watch",
+    "test:preview": "vite preview --outDir vitest-ui",
+    "test:ui": "vitest --watch --ui",
     "test:nuxt": "vitest run --project nuxt",
     "test:nuxt:watch": "vitest --watch --project nuxt",
     "test:unit": "vitest run --project unit",
-    "test:unit:watch": "vitest --watch --project unit"
+    "test:unit:watch": "vitest --watch --project unit",
+
+    "coverage": "vitest run --coverage",
+    "coverage:preview": "vite preview --outDir vitest-ui --open",
+
+    "e2e": "npx dotenv -e .env.development.local -- npx playwright test",
+    "e2e:with:report": "npx dotenv -e .env.development.local -- npx playwright test && playwright show-report",
+    "e2e:safari": "npx dotenv -e .env.development.local -- npx playwright test --project 'Desktop Safari'",
+    "e2e:last:failed": "npx dotenv -e .env.development.local -- npx playwright test --last-failed",
+    "e2e:debug": "npx dotenv -e .env.development.local -- npx playwright test --debug",
+    "e2e:ui": "npx dotenv -e .env.development.local -- npx playwright test --ui",
+    "e2e:head": "npx dotenv -e .env.development.local -- npx playwright test --headed",
+    "e2e:prod": "npx dotenv -e .env.production -- npx playwright test",
+    "e2e:prod:ui": "npx dotenv -e .env.production -- npx playwright test --ui",
+    "e2e:prod:head": "npx dotenv -e .env.production -- npx playwright test --headed",
+    "e2e:report": "playwright show-report"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.8.0",
@@ -42,9 +66,14 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@nuxt/test-utils": "^3.19.2",
+    "@nuxt/test-utils": "^3.20.1",
     "@pinia/testing": "^1.0.2",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
     "@vue/test-utils": "^2.4.6",
+    "dotenv-cli": "^11.0.0",
     "eslint-config-prettier": "^10.1.8",
     "happy-dom": "^18.0.1",
     "playwright-core": "^1.56.0",

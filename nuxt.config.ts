@@ -48,7 +48,7 @@ export default defineNuxtConfig({
   },
   eslint: {
     // options here
-    checker: true, // ESLint checking on runing dev server
+    checker: true, // ESLint checking on running dev server
   },
   typescript: {
     /*
@@ -103,7 +103,7 @@ export default defineNuxtConfig({
         // Modern SVG
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon/favicon.svg' },
 
-        // PNG favicons
+        // PNG favicon
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon/favicon-96x96.png' },
@@ -112,7 +112,7 @@ export default defineNuxtConfig({
         // { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/favicon/web-app-manifest-192x192.png',},
         // { rel: 'icon', type: 'image/png', sizes: '512x512', href: '/favicon/web-app-manifest-512x512.png',},
 
-        // iOS homescreen
+        // iOS home screen
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png' },
 
         // PWA manifest
@@ -162,7 +162,7 @@ export default defineNuxtConfig({
         scss: {
           additionalData:
             '@use "@/assets/scss/colors.scss" as *; @use "@/assets/scss/variables.scss" as *; @use "@/assets/scss/mixins.scss" as *; @use "@/assets/scss/input.scss" as *;',
-          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
+          silenceDeprecations: ['color-functions', 'global-builtin', 'import'],
         },
       },
     },
@@ -171,7 +171,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    // runtimeConfig values can be accesd by useRuntimeConfig(), for example: useRuntimeConfig().public.baseUrl
+    // runtimeConfig values can be accessed by useRuntimeConfig(), for example: useRuntimeConfig().public.baseUrl
 
     mockApi: process.env.NUXT_MOCK_API, //! as mockApi is Not public - it can be accessed ONLY on SERVER side by useRuntimeConfig().mockApi
     mockApiTodosPath: process.env.NUXT_MOCK_API_TODOS_PATH, //! as mockApiTodosPath is Not public - it can be accessed ONLY on SERVER side by useRuntimeConfig().mockApiTodosPath
@@ -188,11 +188,11 @@ export default defineNuxtConfig({
       baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
       baseUrlNuxtApi: process.env.NUXT_BASE_URL_TO_NUXT_API,
 
-      //! the default values will be overriden by appropriate values from .env file served by LOCAL server:
+      //! the default values will be overridden by appropriate values from .env file served by LOCAL server:
       // for example: nuxt dev --dotenv .env.development.local
 
-      //! when we build the project as SSR for deployment - the default values will be overriden by appropriate values of env vars of the set on the hosting platform (Vercel, Netlify, Docker, etc.)
-      //! when we generate the project as SSG for deployment - the default values will be overriden by appropriate values of env vars in generating time, for example: nuxt generate --dotenv .env.production
+      //! when we build the project as SSR for deployment - the default values will be overridden by appropriate values of env vars of the set on the hosting platform (Vercel, Netlify, Docker, etc.)
+      //! when we generate the project as SSG for deployment - the default values will be overridden by appropriate values of env vars in generating time, for example: nuxt generate --dotenv .env.production
       theme: 'default-theme', // as we don't have in .env file the key NUXT_PUBLIC_THEME - the default value for theme will be used: 'default-theme'
       apiBase: 'default-api-base', // as we have in .env file the key NUXT_PUBLIC_API_BASE - it's value will override the default value 'default-api-base'
 
@@ -241,7 +241,7 @@ export default defineNuxtConfig({
           },
         ],
       },
-      { loc: '/posts', lastmod: '2025-09-27' }, // as pages/posts/[[slug]].vue is dynamic - it is not included to Sitemap, we includ it manually
+      { loc: '/posts', lastmod: '2025-09-27' }, // as pages/posts/[[slug]].vue is dynamic - it is not included to Sitemap, we include it manually
       // other urls are created from pages index files: pages/albums/index.vue; pages/custom-fetch/index.vue; ...
     ],
   },
